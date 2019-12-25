@@ -1,5 +1,6 @@
 package com.example.juegopedromanuelcubomedina;
 
+import android.app.ActionBar;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
@@ -61,6 +62,8 @@ public class Personaje extends View implements GestureDetector.OnDoubleTapListen
     {
 
         super(context);
+
+
         this.migesture=new GestureDetectorCompat(getContext(),this);
         migesture.setOnDoubleTapListener(this);
 
@@ -148,20 +151,26 @@ public class Personaje extends View implements GestureDetector.OnDoubleTapListen
         rojox=rojox-rojov;
         if (haTocado(cocox,cocoy)) {
             resultado++;
+            suena();
             cocox=-10;
 
         }else if (haTocado(coco2x,coco2y)) {
             resultado++;
+            suena();
             coco2x=-10;
         } else if (haTocado(verdex,verdey)) {
             resultado=resultado+10;
+            suena();
             verdex=-10;
         } else if (haTocado(ninox,ninoy)) {
         resultado=resultado+50;
+            suena();
         ninov=0;
         ninox=-10;
     } else if (haTocado(rojox,rojoy)) {
             contador++;
+            mp = MediaPlayer.create(getContext(), R.raw.metallic);
+            mp.start();
             rojox=-10;
         }
 
@@ -203,6 +212,8 @@ public class Personaje extends View implements GestureDetector.OnDoubleTapListen
         canvas.drawCircle(verdex,verdey,24,verdepaint);
         canvas.drawCircle(rojox,rojoy, 24,rojopaint);
 
+
+
         switch (contador) {
             case 0:
                 canvas.drawBitmap(vida[0],580,10,null);
@@ -213,6 +224,7 @@ public class Personaje extends View implements GestureDetector.OnDoubleTapListen
                 canvas.drawBitmap(vida[1],580,10,null);
                 canvas.drawBitmap(vida[0],680,10,null);
                 canvas.drawBitmap(vida[0],780,10,null);
+
                 break;
             case 2:
                 canvas.drawBitmap(vida[1],580,10,null);
@@ -271,12 +283,16 @@ public class Personaje extends View implements GestureDetector.OnDoubleTapListen
 
     }
 
+    public void suena() {
+        mp = MediaPlayer.create(getContext(), R.raw.coin);
+        mp.start();
+    }
+
 
 
     public boolean haTocado(int x, int y) {
         if (monox<x && x<(monox+mono[0].getWidth()) && monoy<y && y<(monoy+mono[0].getHeight())) {
-            mp = MediaPlayer.create(getContext(), R.raw.coin);
-            mp.start();
+
             return true;
         }
         return false;

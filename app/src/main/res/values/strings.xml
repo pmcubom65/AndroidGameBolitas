@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">Mono Salva Niños</string>
+    <string name="title_activity_mapas_google">Map</string>
 </resources>

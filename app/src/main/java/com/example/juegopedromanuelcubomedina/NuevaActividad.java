@@ -2,6 +2,7 @@ package com.example.juegopedromanuelcubomedina;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.ActionBar;
 import android.app.Activity;
 import android.content.Intent;
 import android.media.MediaPlayer;
@@ -15,9 +16,6 @@ public class NuevaActividad extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_nueva_actividad);
-
-
-
 
 
 

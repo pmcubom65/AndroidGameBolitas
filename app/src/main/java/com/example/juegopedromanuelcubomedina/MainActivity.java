@@ -3,6 +3,7 @@ package com.example.juegopedromanuelcubomedina;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.view.GestureDetectorCompat;
 
+import android.app.ActionBar;
 import android.content.Intent;
 import android.media.MediaPlayer;
 import android.os.Bundle;
@@ -22,14 +23,20 @@ public class MainActivity extends AppCompatActivity {
     MediaPlayer mediaPlayer;
 
 
+    private Personaje2 personaje2;
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState)  {
         super.onCreate(savedInstanceState);
-        personaje=new Personaje(this);
+
+
+        // personaje=new Personaje(this);
+        personaje2=new Personaje2(this);
         mediaPlayer = MediaPlayer.create(getApplicationContext(), R.raw.battle);
 
         mediaPlayer.start();
-        setContentView(personaje);
+        setContentView(personaje2);
 
 
         Timer timer=new Timer();
@@ -39,7 +46,9 @@ public class MainActivity extends AppCompatActivity {
                 handler.post(new Runnable() {
                     @Override
                     public void run() {
-                        personaje.invalidate();
+            //            personaje.invalidate();
+                        personaje2.invalidate();
+
                     }
                 });
             }
