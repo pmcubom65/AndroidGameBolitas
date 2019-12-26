@@ -7,6 +7,7 @@ import android.app.Activity;
 import android.content.Intent;
 import android.media.MediaPlayer;
 import android.os.Bundle;
+import android.view.Menu;
 
 public class NuevaActividad extends Activity {
 
@@ -27,7 +28,8 @@ public class NuevaActividad extends Activity {
                }catch (Exception e) {
 
                }finally {
-                   Intent intent=new Intent(NuevaActividad.this, MainActivity.class);
+            //       Intent intent=new Intent(NuevaActividad.this, MainActivity.class);
+                   Intent intent=new Intent(NuevaActividad.this, MenuActividad.class);
                    startActivity(intent);
                }
             }

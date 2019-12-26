@@ -58,7 +58,7 @@ public class Personaje2 extends View {
 
 
         resultado=0;
-        backgroundfondo= BitmapFactory.decodeResource(getResources(),R.drawable.fondo2);
+        backgroundfondo= BitmapFactory.decodeResource(getResources(),R.drawable.lluvia);
 
         score.setColor(Color.WHITE);
         score.setTextSize(70);
@@ -168,7 +168,7 @@ public class Personaje2 extends View {
                 canvas.drawBitmap(vida[1], 780, 10, null);
 
 
-       /*         tiempofinal=System.currentTimeMillis()-tiempo;
+                tiempofinal=System.currentTimeMillis()-tiempo;
                 String segundos=String.valueOf(tiempofinal/1000);
                 LocalDate ld=LocalDate.now();
                 DateTimeFormatter dt=DateTimeFormatter.ofPattern("dd/MM/yyyy");
@@ -186,7 +186,7 @@ public class Personaje2 extends View {
                 intent.putExtra("fecha", fecha);
 
 
-                getContext().startActivity(intent);*/
+                getContext().startActivity(intent);
 
         break;
         }
