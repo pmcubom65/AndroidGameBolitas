@@ -52,8 +52,8 @@ public class TitularFragment extends ListFragment {
 
 
         ArrayList<String> data=new ArrayList<>();
-        data.add("Juego 1");
-        data.add("Juego 2");
+        data.add("Juego 1: Recoge las bolas, esquiva las rojas");
+        data.add("Juego 2: Recoge todas las gotas");
 
         setListAdapter(new ArrayAdapter<String>(getActivity(), android.R.layout.simple_list_item_1, data));
 
