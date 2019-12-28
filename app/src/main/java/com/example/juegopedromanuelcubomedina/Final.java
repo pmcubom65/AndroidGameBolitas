@@ -92,16 +92,22 @@ public class Final extends AppCompatActivity  {
 
         ContentValues contentvalues=new ContentValues();
 
-        //(fecha text, puntuacion text, tiempo text)
+
 
         contentvalues.put("fecha", fecha);
         contentvalues.put("puntuacion", resultado);
         contentvalues.put("tiempo", segundos);
 
+     long row= midatabase.insertWithOnConflict("resultado",null, contentvalues, SQLiteDatabase.CONFLICT_IGNORE);
 
-     long row= midatabase.insert("resultado",null, contentvalues);
-     contentvalues.clear();
+
+
         System.out.println("insertado "+row);
+    midatabase.close();
+
+
+     contentvalues.clear();
+
 
 
         DateTimeFormatter dtf=DateTimeFormatter.ofPattern("dd/MM/yyyy");
@@ -111,8 +117,8 @@ public class Final extends AppCompatActivity  {
        Cursor cursor= databaselectura.query("resultado",columnas,null,null,null,null,null);
         cursor.moveToFirst();
         LocalDate ld;
-
-        while (cursor.moveToNext()) {
+        conjunto.clear();
+        do {
 
 
             ld=LocalDate.parse(cursor.getString(0), dtf);
@@ -123,7 +129,7 @@ public class Final extends AppCompatActivity  {
                 conjunto.add(new DatoEstadistico(ld,score ,tiempo));
 
 
-        }
+        }while (cursor.moveToNext());
 
         Collections.sort(conjunto, new Comparator<DatoEstadistico>() {
             @Override

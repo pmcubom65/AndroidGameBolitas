@@ -235,7 +235,7 @@ public class Personaje extends View implements GestureDetector.OnDoubleTapListen
                 canvas.drawBitmap(vida[1],580,10,null);
                 canvas.drawBitmap(vida[1],680,10,null);
                 canvas.drawBitmap(vida[1],780,10,null);
-
+                int puntuacionfinal=resultado;
                     tiempofinal=System.currentTimeMillis()-tiempo;
                     String segundos=String.valueOf(tiempofinal/1000);
                     LocalDate ld=LocalDate.now();
@@ -249,7 +249,7 @@ public class Personaje extends View implements GestureDetector.OnDoubleTapListen
 
                     Intent intent=new Intent(getContext(), Final.class);
                     intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
-                    intent.putExtra("puntuacion",String.valueOf(resultado));
+                    intent.putExtra("puntuacion",String.valueOf(puntuacionfinal));
                 intent.putExtra("segundos",segundos);
                 intent.putExtra("fecha", fecha);
 
