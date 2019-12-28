@@ -24,6 +24,7 @@ public class MenuActividad extends AppCompatActivity implements TitularFragment.
     ArrayList<Integer> descriptions;
 
     int indice=0;
+    static int numerojuego=0;
 
 
     @Override
@@ -49,11 +50,15 @@ public class MenuActividad extends AppCompatActivity implements TitularFragment.
             public void onClick(View v) {
 
                 if (indice==0) {
+                    numerojuego=1;
                     Intent intent=new Intent(MenuActividad.this, MainActivity.class);
                     startActivity(intent);
                 } else if(indice==1) {
+                    numerojuego=2;
                     Intent intent=new Intent(MenuActividad.this, MainActivity2.class);
                     startActivity(intent);
+                } else {
+
                 }
 
 

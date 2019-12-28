@@ -29,6 +29,13 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.text.Format;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.HashSet;
 
 
 public class Final extends AppCompatActivity  {
@@ -41,6 +48,11 @@ public class Final extends AppCompatActivity  {
     String resultado;
     private final String canal="5555";
     private final int notificationid=001;
+
+
+
+
+    public static ArrayList<DatoEstadistico> conjunto=new ArrayList<>();
 
 
 
@@ -58,7 +70,11 @@ public class Final extends AppCompatActivity  {
         b.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent=new Intent(Final.this, MenuActividad.class);
+
+
+
+                Intent intent=(MenuActividad.numerojuego==1)?new Intent(Final.this, MainActivity.class):new Intent(Final.this, MainActivity2.class);
+
                 startActivity(intent);
             }
         });
@@ -83,45 +99,63 @@ public class Final extends AppCompatActivity  {
         contentvalues.put("tiempo", segundos);
 
 
-       long row= midatabase.insert("resultado",null, contentvalues);
+     long row= midatabase.insert("resultado",null, contentvalues);
+     contentvalues.clear();
+        System.out.println("insertado "+row);
 
-       if (row>30) {
-           midatabase.execSQL("delete from resultado where puntuacion<10");
-       }
 
+        DateTimeFormatter dtf=DateTimeFormatter.ofPattern("dd/MM/yyyy");
 
         SQLiteDatabase databaselectura=r.getReadableDatabase();
         String[] columnas={"fecha", "puntuacion", "tiempo"};
-       Cursor cursor= databaselectura.query("resultado",columnas,null,null,null,null,"fecha" + " DESC");
+       Cursor cursor= databaselectura.query("resultado",columnas,null,null,null,null,null);
         cursor.moveToFirst();
+        LocalDate ld;
 
-        total="   Fecha      Score     Tiempo\n";
         while (cursor.moveToNext()) {
-            total=String.format("%s  %s    %s   %s\n",total, cursor.getString(0),cursor.getString(1),cursor.getString(2));
+
+
+            ld=LocalDate.parse(cursor.getString(0), dtf);
+            String score=cursor.getString(1);
+            String tiempo=cursor.getString(2);
+
+
+                conjunto.add(new DatoEstadistico(ld,score ,tiempo));
+
+
         }
 
+        Collections.sort(conjunto, new Comparator<DatoEstadistico>() {
+            @Override
+            public int compare(DatoEstadistico o1, DatoEstadistico o2) {
+                return o1.getFecha().compareTo(o2.getFecha());
+            }
 
+
+        });
 
 
 
     }
 
     public void dameEstadisticas(View v) {
-        Intent ni=new Intent(Final.this, Estadisticas.class);
-        ni.putExtra("estadistica",total);
+
+
+      Intent ni=new Intent(Final.this, MostrarEstadisticas.class);
+
         ni.putExtra("resultado", resultado);
         notificationChannel();
-        Intent seguirintent=new Intent(this,Personaje.class);
+        Intent seguirintent=(MenuActividad.numerojuego==1)?new Intent(this,MainActivity.class):new Intent(this,MainActivity2.class);
         seguirintent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK|Intent.FLAG_ACTIVITY_CLEAR_TASK);
         PendingIntent pendingIntent=PendingIntent.getActivity(this,0,seguirintent,PendingIntent.FLAG_ONE_SHOT);
 
-        Intent siintent=new Intent(this, Personaje.class);
+        Intent siintent=(MenuActividad.numerojuego==1)?new Intent(this, MainActivity.class):new Intent(this, MainActivity2.class);
         siintent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK|Intent.FLAG_ACTIVITY_CLEAR_TASK);
 
         PendingIntent sipendingintent=PendingIntent.getActivity(this,0,siintent,PendingIntent.FLAG_ONE_SHOT);
 
 
-        Intent nointent=new Intent(this, Estadisticas.class);
+        Intent nointent=new Intent(this, MostrarEstadisticas.class);
         nointent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK|Intent.FLAG_ACTIVITY_CLEAR_TASK);
 
         PendingIntent nopendingintent=PendingIntent.getActivity(this,0,nointent,PendingIntent.FLAG_ONE_SHOT);
@@ -132,8 +166,8 @@ public class Final extends AppCompatActivity  {
 
         NotificationCompat.Builder notification=new NotificationCompat.Builder(this, canal);
         notification.setSmallIcon(R.drawable.mono1);
-        notification.setContentTitle("Ultimo score");
-        notification.setContentText("El último score es "+resultado);
+        notification.setContentTitle("El último score de su partida fue "+resultado);
+        notification.setContentText("¿Revancha?");
         notification.setPriority(NotificationCompat.PRIORITY_DEFAULT);
         notification.setAutoCancel(true);
         notification.setContentIntent(pendingIntent);

@@ -15,7 +15,8 @@
         android:roundIcon="@drawable/mono1"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".MainActivity2"></activity>
+        <activity android:name=".MostrarEstadisticas"></activity>
+        <activity android:name=".MainActivity2" />
         <activity android:name=".MenuActividad" />
         <activity android:name=".Estadisticas" />
         <!--
