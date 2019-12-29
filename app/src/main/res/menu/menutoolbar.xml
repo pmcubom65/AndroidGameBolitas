@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <item android:id="@+id/indicador1"
+        android:title="share"
+        android:icon="@mipmap/menupop"
+        app:showAsAction="ifRoom"
+
+
+
+        />
+
+    <item android:id="@+id/indicador2"
+        android:title="ordenar por tiempo"
+
+        app:showAsAction="never"
+
+        />
+
+
+    <item android:id="@+id/indicador3"
+        android:title="ordenar por score"
+
+        app:showAsAction="never"
+
+        />
+
+
+    <item android:id="@+id/indicador4"
+        android:title="ordenar por fecha"
+
+        app:showAsAction="never"
+
+        />
+
+
+</menu>

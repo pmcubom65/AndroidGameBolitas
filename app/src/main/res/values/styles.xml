@@ -9,11 +9,14 @@
     </style>
 
 
-    <style name="OtroTheme" parent="Theme.AppCompat.Light.DarkActionBar">
+    <style name="OtroTheme" parent="Theme.AppCompat">
         <!-- Customize your theme here. -->
         <item name="colorPrimary">#9c27b0</item>
         <item name="colorPrimaryDark">#7b1fa2</item>
         <item name="colorAccent">#e040fb</item>
+        <item name="android:textColorPrimary">@android:color/white</item>
+        <item name="android:textColorSecondary">@android:color/white</item>
+        <item name="actionMenuTextColor">@android:color/white</item>
     </style>
 
 
