@@ -58,6 +58,8 @@ public class MenuActividad extends AppCompatActivity implements TitularFragment.
                     Intent intent=new Intent(MenuActividad.this, MainActivity2.class);
                     startActivity(intent);
                 } else {
+                    MiDialogo miDialogo=new MiDialogo();
+                    miDialogo.show(getSupportFragmentManager(),"mi dialogo");
 
                 }
 
