@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <group android:checkableBehavior="single">
+
+        <item
+            android:id="@+id/mihome"
+            android:title="Home"
+            android:icon="@drawable/home"
+
+
+/>
+
+        <item
+            android:id="@+id/miexit"
+            android:title="Exit"
+            android:icon="@drawable/exit"
+
+            />
+
+
+
+
+        </group>
+
+
+
+</menu>

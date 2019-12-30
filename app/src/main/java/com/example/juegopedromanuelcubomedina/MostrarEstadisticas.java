@@ -3,13 +3,17 @@ package com.example.juegopedromanuelcubomedina;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+
+import com.google.android.material.navigation.NavigationView;
 
 import java.util.ArrayList;
 import java.util.Comparator;
@@ -22,8 +26,10 @@ public class MostrarEstadisticas extends AppCompatActivity {
 
     ArrayList<DatoEstadistico> todoslosdatos;
     private Toolbar toolbar;
+    private DrawerLayout midrawer;
+    private NavigationView minavegacion;
 
-
+    private boolean ahome=false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,8 +52,28 @@ public class MostrarEstadisticas extends AppCompatActivity {
         recyclerView.setAdapter(myAdapter);
 
 
+        midrawer=findViewById(R.id.midrawer);
+        minavegacion=findViewById(R.id.minavegacion);
+
+        minavegacion.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
+            @Override
+            public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
+                switch (menuItem.getItemId()) {
+                    case R.id.mihome:
+                        menuItem.setChecked(true);
+                        return true;
+                    case R.id.miexit:
+                        menuItem.setChecked(true);
+                        System.exit(0);
+                        return true;
+                }
+                    return false;
+            }
+        });
+
 
     }
+
 
 
     @Override
@@ -67,7 +93,9 @@ public class MostrarEstadisticas extends AppCompatActivity {
                 Final.conjunto.sort(new Comparator<DatoEstadistico>() {
                     @Override
                     public int compare(DatoEstadistico o1, DatoEstadistico o2) {
-                        return o1.getTiempo().compareTo(o2.getTiempo());
+                       return Integer.parseInt(o1.getTiempo())-Integer.parseInt(o2.getTiempo());
+
+                      //  return o1.getTiempo().compareTo(o2.getTiempo());
                     }
                 });break;
 
@@ -75,7 +103,10 @@ public class MostrarEstadisticas extends AppCompatActivity {
                 Final.conjunto.sort(new Comparator<DatoEstadistico>() {
                     @Override
                     public int compare(DatoEstadistico o1, DatoEstadistico o2) {
-                        return o1.getPuntuacion().compareTo(o2.getPuntuacion());
+                        return Integer.parseInt(o1.getPuntuacion())-Integer.parseInt(o2.getPuntuacion());
+
+
+                        //     return o1.getPuntuacion().compareTo(o2.getPuntuacion());
                     }
                 });break;
             case R.id.indicador4:
