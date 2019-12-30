@@ -2,14 +2,7 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
-    <item android:id="@+id/indicador1"
-        android:title="share"
-        android:icon="@mipmap/menupop"
-        app:showAsAction="ifRoom"
 
-
-
-        />
 
     <item android:id="@+id/indicador2"
         android:title="ordenar por tiempo"

@@ -48,6 +48,7 @@ public class Final extends AppCompatActivity  {
     String resultado;
     private final String canal="5555";
     private final int notificationid=001;
+    private String numjuego="";
 
 
 
@@ -81,6 +82,7 @@ public class Final extends AppCompatActivity  {
         resultado=getIntent().getStringExtra("puntuacion");
         String segundos=getIntent().getStringExtra("segundos");
         String fecha=getIntent().getStringExtra("fecha");
+        String numjuego=(MenuActividad.numerojuego==1)?"Juego 1":"Juego 2";
 
 
         pongo=String.format("Resultado: %s",resultado);
@@ -97,8 +99,9 @@ public class Final extends AppCompatActivity  {
         contentvalues.put("fecha", fecha);
         contentvalues.put("puntuacion", resultado);
         contentvalues.put("tiempo", segundos);
+        contentvalues.put("juego", numjuego);
 
-     long row= midatabase.insertWithOnConflict("resultado",null, contentvalues, SQLiteDatabase.CONFLICT_IGNORE);
+     long row= midatabase.insertWithOnConflict("resultado",null, contentvalues, SQLiteDatabase.CONFLICT_REPLACE);
 
 
 
@@ -113,7 +116,7 @@ public class Final extends AppCompatActivity  {
         DateTimeFormatter dtf=DateTimeFormatter.ofPattern("dd/MM/yyyy");
 
         SQLiteDatabase databaselectura=r.getReadableDatabase();
-        String[] columnas={"fecha", "puntuacion", "tiempo"};
+        String[] columnas={"fecha", "puntuacion", "tiempo", "juego"};
        Cursor cursor= databaselectura.query("resultado",columnas,null,null,null,null,null);
         cursor.moveToFirst();
         LocalDate ld;
@@ -124,9 +127,9 @@ public class Final extends AppCompatActivity  {
             ld=LocalDate.parse(cursor.getString(0), dtf);
             String score=cursor.getString(1);
             String tiempo=cursor.getString(2);
+             String numjuegodb=cursor.getString(3);
 
-
-                conjunto.add(new DatoEstadistico(ld,score ,tiempo));
+                conjunto.add(new DatoEstadistico(ld,score ,tiempo, numjuegodb));
 
 
         }while (cursor.moveToNext());

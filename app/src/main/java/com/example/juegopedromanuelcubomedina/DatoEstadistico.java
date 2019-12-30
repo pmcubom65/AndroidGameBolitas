@@ -8,11 +8,21 @@ public class DatoEstadistico {
     private String puntuacion;
     private String tiempo;
     private LocalDate fecha;
+    private String numjuego;
 
-    public DatoEstadistico(LocalDate fecha, String puntuacion, String tiempo) {
+    public DatoEstadistico(LocalDate fecha, String puntuacion, String tiempo, String numjuego) {
         this.puntuacion = puntuacion;
         this.tiempo = tiempo;
         this.fecha = fecha;
+        this.numjuego=numjuego;
+    }
+
+    public String getNumjuego() {
+        return numjuego;
+    }
+
+    public void setNumjuego(String numjuego) {
+        this.numjuego = numjuego;
     }
 
     public void setPuntuacion(String puntuacion) {

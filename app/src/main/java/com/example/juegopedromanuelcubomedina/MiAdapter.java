@@ -22,14 +22,14 @@ public class MiAdapter extends RecyclerView.Adapter<MiAdapter.ViewHolder> {
 
     public class ViewHolder extends RecyclerView.ViewHolder {
 
-        TextView tv1,tv2,tv3;
+        TextView tv1,tv2,tv3, tv4;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
             tv1=itemView.findViewById(R.id.tv1);
             tv2=itemView.findViewById(R.id.tv2);
             tv3=itemView.findViewById(R.id.tv3);
-
+            tv4=itemView.findViewById(R.id.tv4);
         }
     }
 
@@ -50,6 +50,7 @@ public class MiAdapter extends RecyclerView.Adapter<MiAdapter.ViewHolder> {
         holder.tv1.setText(datos.get(position).getFecha().toString());
         holder.tv2.setText(datos.get(position).getPuntuacion());
         holder.tv3.setText(datos.get(position).getTiempo());
+        holder.tv4.setText(datos.get(position).getNumjuego());
 
 
     }

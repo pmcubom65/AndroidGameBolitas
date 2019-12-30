@@ -14,7 +14,7 @@ public class Resultados extends SQLiteOpenHelper {
 
     @Override
     public void onCreate(SQLiteDatabase db) {
-        db.execSQL("create table resultado (fecha text, puntuacion text, tiempo text, unique(fecha,puntuacion,tiempo))");
+        db.execSQL("create table resultado (fecha text, puntuacion text, tiempo text, juego text, unique(fecha,puntuacion,tiempo))");
 
     }
 

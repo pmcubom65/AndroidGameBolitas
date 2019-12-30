@@ -168,8 +168,8 @@ public class Personaje2 extends View {
                 canvas.drawBitmap(vida[1], 780, 10, null);
                 int puntuacionfinal=resultado;
 
-                tiempofinal=System.currentTimeMillis()-tiempo;
-                String segundos=String.valueOf(tiempofinal/1000);
+          //      tiempofinal=System.currentTimeMillis()-tiempo;
+                String segundos=String.valueOf((int) Math.round((System.currentTimeMillis()-tiempo)/1000));
                 LocalDate ld=LocalDate.now();
                 DateTimeFormatter dt=DateTimeFormatter.ofPattern("dd/MM/yyyy");
                 String fecha=ld.format(dt).toString();
