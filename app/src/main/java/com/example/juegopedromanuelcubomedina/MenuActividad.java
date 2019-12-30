@@ -23,8 +23,8 @@ public class MenuActividad extends AppCompatActivity implements TitularFragment.
     ImageView laimagen;
     ArrayList<Integer> descriptions;
 
-    int indice=0;
-    static int numerojuego=0;
+    int indice=2;
+    static int numerojuego=1;
 
 
     @Override
