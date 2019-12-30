@@ -76,6 +76,10 @@ public class MostrarEstadisticas extends AppCompatActivity {
                         menuItem.setChecked(true);
                         System.exit(0);
                         return true;
+                    case R.id.mimapa:
+                        menuItem.setChecked(true);
+                        cambioGps();
+                        return true;
                 }
                     return false;
             }
@@ -87,6 +91,13 @@ public class MostrarEstadisticas extends AppCompatActivity {
         startActivity(new Intent(this, NuevaActividad.class));
 
     }
+
+
+    public void cambioGps() {
+        startActivity(new Intent(this, MiGps.class));
+
+    }
+
 
 
 
