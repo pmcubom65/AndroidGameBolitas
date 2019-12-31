@@ -98,11 +98,13 @@ public class Final extends AppCompatActivity  {
 
         contentvalues.put("fecha", fecha);
         contentvalues.put("puntuacion", resultado);
+
         contentvalues.put("tiempo", segundos);
         contentvalues.put("juego", numjuego);
 
      long row= midatabase.insertWithOnConflict("resultado",null, contentvalues, SQLiteDatabase.CONFLICT_REPLACE);
 
+        contentvalues.remove("tiempo");
 
 
         System.out.println("insertado "+row);

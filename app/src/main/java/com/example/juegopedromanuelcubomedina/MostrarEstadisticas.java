@@ -80,6 +80,12 @@ public class MostrarEstadisticas extends AppCompatActivity {
                         menuItem.setChecked(true);
                         cambioGps();
                         return true;
+
+                    case R.id.misport:
+                        menuItem.setChecked(true);
+                        MiDialogo miDialogo=new MiDialogo();
+                        miDialogo.show(getSupportFragmentManager(),"mi dialogo");
+                        return true;
                 }
                     return false;
             }
@@ -94,7 +100,7 @@ public class MostrarEstadisticas extends AppCompatActivity {
 
 
     public void cambioGps() {
-        startActivity(new Intent(this, MiGps.class));
+        startActivity(new Intent(this, MapasGoogle.class));
 
     }
 

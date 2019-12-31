@@ -238,7 +238,7 @@ public class Personaje extends View implements GestureDetector.OnDoubleTapListen
 
                 int puntuacionfinal=resultado;
                     //tiempofinal=System.currentTimeMillis()-tiempo;
-                    String segundos=String.valueOf((int) Math.round((System.currentTimeMillis()-tiempo)/1000));
+                String segundos=String.valueOf((int) Math.round(Math.ceil((System.currentTimeMillis()-tiempo)/1000)));
                     LocalDate ld=LocalDate.now();
                     DateTimeFormatter dt=DateTimeFormatter.ofPattern("dd/MM/yyyy");
                     String fecha=ld.format(dt).toString();
