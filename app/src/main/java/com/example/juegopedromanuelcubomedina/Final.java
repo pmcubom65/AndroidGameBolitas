@@ -49,6 +49,7 @@ public class Final extends AppCompatActivity  {
     private final String canal="5555";
     private final int notificationid=001;
     private String numjuego="";
+    int contador=0;
 
 
 
@@ -104,8 +105,12 @@ public class Final extends AppCompatActivity  {
 
      long row= midatabase.insertWithOnConflict("resultado",null, contentvalues, SQLiteDatabase.CONFLICT_REPLACE);
 
-        contentvalues.remove("tiempo");
-
+       contador++;
+       if ((int) row!=contador) {
+           contador=contador+1;
+           midatabase.execSQL("DELETE FROM resultado WHERE id ="+ contador);
+       }
+        contador=(int) row;
 
         System.out.println("insertado "+row);
     midatabase.close();

@@ -35,6 +35,10 @@ public class MapasGoogle extends FragmentActivity implements OnMapReadyCallback 
     double longitud;
     private static final long MIN_TIME = 10000;
     Marker mCurrLocationMarker=null;
+    LocationListener locationListener;
+    LatLng latLng;
+    LocationManager  locationManager;
+
 
     GoogleMap mGoogleMap;
     GoogleApiClient mGoogleApiClient;
@@ -131,7 +135,7 @@ public class MapasGoogle extends FragmentActivity implements OnMapReadyCallback 
     public void onMapReady(GoogleMap googleMap) {
      //   Gps gps=new Gps();
           mMap = googleMap;
-        mMap.setMyLocationEnabled(true);
+
 
    /*     mMap.setOnCameraMoveListener(new GoogleMap.OnCameraMoveListener() {
             @Override
@@ -166,6 +170,7 @@ public class MapasGoogle extends FragmentActivity implements OnMapReadyCallback 
 
     @Override
     public void onLocationChanged(Location location) {
+        mMap.clear();
         latitud=location.getLatitude();
         longitud=location.getLongitude();
 
@@ -185,6 +190,8 @@ public class MapasGoogle extends FragmentActivity implements OnMapReadyCallback 
                 .position(latLng)
                 .zIndex(20).title("Score"));
     }
+
+
 
     @Override
     public void onStatusChanged(String provider, int status, Bundle extras) {
