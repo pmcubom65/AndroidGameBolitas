@@ -19,14 +19,6 @@
 
 
 
-
-        <item
-            android:id="@+id/miexit"
-            android:title="Exit"
-            android:icon="@drawable/exit"
-
-            />
-
         <item
             android:id="@+id/misport"
             android:title="Cambiar de Juego"
@@ -35,6 +27,14 @@
             />
 
 
+
+
+        <item
+            android:id="@+id/miexit"
+            android:title="Exit"
+            android:icon="@drawable/exit"
+
+            />
         </group>
 
 
