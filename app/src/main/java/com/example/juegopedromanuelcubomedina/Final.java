@@ -105,12 +105,6 @@ public class Final extends AppCompatActivity  {
 
      long row= midatabase.insertWithOnConflict("resultado",null, contentvalues, SQLiteDatabase.CONFLICT_REPLACE);
 
-       contador++;
-       if ((int) row!=contador) {
-           contador=contador+1;
-           midatabase.execSQL("DELETE FROM resultado WHERE id ="+ contador);
-       }
-        contador=(int) row;
 
         System.out.println("insertado "+row);
     midatabase.close();

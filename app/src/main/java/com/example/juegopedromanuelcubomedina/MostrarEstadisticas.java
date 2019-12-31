@@ -30,13 +30,18 @@ public class MostrarEstadisticas extends AppCompatActivity {
     private Toolbar toolbar;
     private DrawerLayout midrawer;
     private NavigationView minavegacion;
-
+    String resultado;
     private boolean ahome=false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_mostrar_estadisticas);
+
+        Intent recibo=getIntent();
+        resultado= recibo.getStringExtra("resultado");
+
+
         toolbar=findViewById(R.id.latoolbar);
 
         setSupportActionBar(toolbar);
@@ -100,7 +105,10 @@ public class MostrarEstadisticas extends AppCompatActivity {
 
 
     public void cambioGps() {
-        startActivity(new Intent(this, MapasGoogle.class));
+
+        Intent algps=new Intent(this, MapasGoogle.class);
+        algps.putExtra("score",resultado);
+        startActivity(algps);
 
     }
 
