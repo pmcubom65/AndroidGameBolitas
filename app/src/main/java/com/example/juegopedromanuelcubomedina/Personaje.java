@@ -236,10 +236,14 @@ public class Personaje extends View implements GestureDetector.OnDoubleTapListen
                 canvas.drawBitmap(vida[1],680,10,null);
                 canvas.drawBitmap(vida[1],780,10,null);
 
+
                 int puntuacionfinal=resultado;
                     //tiempofinal=System.currentTimeMillis()-tiempo;
+
                 String segundos=String.valueOf((int) Math.round(Math.ceil((System.currentTimeMillis()-tiempo)/1000)));
+
                     LocalDate ld=LocalDate.now();
+                mp.release();
                     DateTimeFormatter dt=DateTimeFormatter.ofPattern("dd/MM/yyyy");
                     String fecha=ld.format(dt).toString();
 

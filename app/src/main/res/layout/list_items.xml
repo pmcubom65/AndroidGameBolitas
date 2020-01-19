@@ -33,16 +33,17 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:textAlignment="textStart"
+            android:textAlignment="center"
             android:textColor="@color/miblanco"/>
 
         <TextView
             android:id="@+id/tv4"
+
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:paddingLeft="4dp"
-            android:textAlignment="textStart"
+            android:textAlignment="viewEnd"
             android:textColor="@color/miblanco"/>
 
 

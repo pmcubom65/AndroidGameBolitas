@@ -7,6 +7,7 @@ import android.Manifest;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.graphics.Color;
 import android.location.Address;
 import android.location.Geocoder;
 import android.location.Location;
@@ -77,6 +78,8 @@ import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
+import com.google.android.gms.maps.model.Polyline;
+import com.google.android.gms.maps.model.PolylineOptions;
 
 import java.io.IOException;
 import java.util.List;
@@ -88,6 +91,7 @@ public class MapasGoogle extends FragmentActivity implements OnMapReadyCallback{
     private static final int REQUEST_LOCATION_PERMISSION = 1;
     Marker marker;
     LocationListener locationListener;
+    Polyline line;
 
     String score;
 
@@ -142,6 +146,7 @@ public class MapasGoogle extends FragmentActivity implements OnMapReadyCallback{
                         if (marker != null){
                             marker.remove();
                             marker = mMap.addMarker(new MarkerOptions().position(latLng).title("Score "+score));
+
                             mMap.setMaxZoomPreference(20);
                             mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(latLng, 12.0f));
                         }
@@ -200,6 +205,12 @@ public class MapasGoogle extends FragmentActivity implements OnMapReadyCallback{
                         if (marker != null){
                             marker.remove();
                             marker = mMap.addMarker(new MarkerOptions().position(latLng).title("Score "+score));
+
+                           line = mMap.addPolyline(new PolylineOptions()
+                                    .add(latLng)
+                                    .width(5)
+                                    .color(Color.RED));
+
                             mMap.setMaxZoomPreference(20);
                             mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(latLng, 12.0f));
                         }

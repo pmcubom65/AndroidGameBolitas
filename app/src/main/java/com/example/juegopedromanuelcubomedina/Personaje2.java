@@ -93,7 +93,12 @@ public class Personaje2 extends View {
         }
         if (monox>maximo) {
             monox=maximo-velocidad;
-
+        }
+        if (contador==1) {
+            monoy=monoy-200;
+        }
+        if (contador==2){
+            monoy=monoy-270;
         }
         velocidad=velocidad+1;
 
@@ -155,12 +160,15 @@ public class Personaje2 extends View {
                 canvas.drawBitmap(vida[1], 580, 10, null);
                 canvas.drawBitmap(vida[0], 680, 10, null);
                 canvas.drawBitmap(vida[0], 780, 10, null);
+                canvas.drawRect(0,canvasalto-500,canvasancho,canvasalto,paintrect);
 
                 break;
             case 2:
                 canvas.drawBitmap(vida[1], 580, 10, null);
                 canvas.drawBitmap(vida[1], 680, 10, null);
                 canvas.drawBitmap(vida[0], 780, 10, null);
+                canvas.drawRect(0,canvasalto-600,canvasancho,canvasalto,paintrect);
+
                 break;
             case 3:
                 canvas.drawBitmap(vida[1], 580, 10, null);
@@ -169,6 +177,7 @@ public class Personaje2 extends View {
                 int puntuacionfinal=resultado;
 
           //      tiempofinal=System.currentTimeMillis()-tiempo;
+            mp.release();
                 String segundos=String.valueOf((int) Math.round(Math.ceil((System.currentTimeMillis()-tiempo)/1000)));
                 LocalDate ld=LocalDate.now();
                 DateTimeFormatter dt=DateTimeFormatter.ofPattern("dd/MM/yyyy");
