@@ -24,7 +24,7 @@
             android:padding="5dp"
             android:textColor="@color/minegro"
             android:textSize="20sp"
-            android:textAlignment="center"
+
             android:text="@string/teclee_el_score_m_s_peque_o_que_este_almacenado_se_borraran_los_menores_a_ese"
             android:textStyle="bold"
             />
@@ -39,7 +39,7 @@
         android:id="@+id/scoreborrar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-
+        android:textAlignment="center"
         android:ems="10"
         android:inputType="number"
         android:hint="@string/scorebor" />

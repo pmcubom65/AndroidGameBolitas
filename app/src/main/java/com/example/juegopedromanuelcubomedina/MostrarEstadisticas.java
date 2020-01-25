@@ -2,6 +2,7 @@ package com.example.juegopedromanuelcubomedina;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBar;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.core.view.GravityCompat;
@@ -23,7 +24,7 @@ import java.util.Comparator;
 import java.util.List;
 import java.util.stream.Collectors;
 
-public class MostrarEstadisticas extends AppCompatActivity {
+public class MostrarEstadisticas extends AppCompatActivity implements DialogoBorrados.ValorTecleado {
 
     RecyclerView recyclerView;
     RecyclerView.Adapter myAdapter;
@@ -165,8 +166,8 @@ public class MostrarEstadisticas extends AppCompatActivity {
 
 
             case R.id.indicador5:
-                Resultados r=new Resultados(this);
-        /*        SQLiteDatabase midatabase=r.getWritableDatabase();
+         /*          Resultados r=new Resultados(this);
+             SQLiteDatabase midatabase=r.getWritableDatabase();
                 midatabase.delete("resultado", "cast(puntuacion as unsigned)<1", null);
                 List<DatoEstadistico> respaldo=new ArrayList<>();
                respaldo=Final.conjunto.stream().filter(i->(Integer.valueOf(i.getPuntuacion())<10)).collect(Collectors.toList());
@@ -187,5 +188,18 @@ public class MostrarEstadisticas extends AppCompatActivity {
         recyclerView.setAdapter(myAdapter);
 
         return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    public void onvalorelegido(String s) {
+        Resultados r=new Resultados(this);
+                SQLiteDatabase midatabase=r.getWritableDatabase();
+                midatabase.delete("resultado", "cast(puntuacion as unsigned)<"+s, null);
+                List<DatoEstadistico> respaldo=new ArrayList<>();
+               respaldo=Final.conjunto.stream().filter(i->(Integer.valueOf(i.getPuntuacion())<Integer.valueOf(s))).collect(Collectors.toList());
+                Final.conjunto.removeAll(respaldo);
+
+
+
     }
 }
