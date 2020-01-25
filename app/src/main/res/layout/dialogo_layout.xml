@@ -11,7 +11,7 @@
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Elija uno de los dos juegos"
+        android:text="@string/elija_uno_de_los_dos_juegos"
         android:id="@+id/textodialogo"
         android:layout_margin="10dp"
         android:textStyle="bold"

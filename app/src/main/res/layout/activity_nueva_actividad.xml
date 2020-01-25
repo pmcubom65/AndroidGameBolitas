@@ -23,7 +23,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="190dp"
-        android:text="Juego de Android"
+        android:text="@string/juego_de_android"
         android:textAlignment="center"
         android:textColor="@color/colorAccent"
         android:textStyle="bold"

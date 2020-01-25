@@ -5,7 +5,7 @@
 
 
     <item android:id="@+id/indicador2"
-        android:title="ordenar por tiempo"
+        android:title="Ordenar por tiempo"
 
         app:showAsAction="never"
 
@@ -13,7 +13,7 @@
 
 
     <item android:id="@+id/indicador3"
-        android:title="ordenar por score"
+        android:title="Ordenar por score"
 
         app:showAsAction="never"
 
@@ -21,11 +21,20 @@
 
 
     <item android:id="@+id/indicador4"
-        android:title="ordenar por fecha"
+        android:title="Ordenar por fecha"
 
         app:showAsAction="never"
 
         />
+
+
+    <item android:id="@+id/indicador5"
+        android:title="Borrar Registros"
+
+        app:showAsAction="never"
+
+        />
+
 
 
 </menu>

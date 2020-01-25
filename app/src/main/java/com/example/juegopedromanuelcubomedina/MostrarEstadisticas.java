@@ -10,6 +10,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
+import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -19,6 +20,8 @@ import com.google.android.material.navigation.NavigationView;
 
 import java.util.ArrayList;
 import java.util.Comparator;
+import java.util.List;
+import java.util.stream.Collectors;
 
 public class MostrarEstadisticas extends AppCompatActivity {
 
@@ -132,7 +135,7 @@ public class MostrarEstadisticas extends AppCompatActivity {
                 Final.conjunto.sort(new Comparator<DatoEstadistico>() {
                     @Override
                     public int compare(DatoEstadistico o1, DatoEstadistico o2) {
-                       return Integer.parseInt(o1.getTiempo())-Integer.parseInt(o2.getTiempo());
+                       return -(Integer.parseInt(o1.getTiempo())-Integer.parseInt(o2.getTiempo()));
 
                       //  return o1.getTiempo().compareTo(o2.getTiempo());
                     }
@@ -142,7 +145,7 @@ public class MostrarEstadisticas extends AppCompatActivity {
                 Final.conjunto.sort(new Comparator<DatoEstadistico>() {
                     @Override
                     public int compare(DatoEstadistico o1, DatoEstadistico o2) {
-                        return Integer.parseInt(o1.getPuntuacion())-Integer.parseInt(o2.getPuntuacion());
+                        return -(Integer.parseInt(o1.getPuntuacion())-Integer.parseInt(o2.getPuntuacion()));
 
 
                         //     return o1.getPuntuacion().compareTo(o2.getPuntuacion());
@@ -159,6 +162,23 @@ public class MostrarEstadisticas extends AppCompatActivity {
             case android.R.id.home:
                 midrawer.openDrawer(GravityCompat.START);
             return true;
+
+
+            case R.id.indicador5:
+                Resultados r=new Resultados(this);
+        /*        SQLiteDatabase midatabase=r.getWritableDatabase();
+                midatabase.delete("resultado", "cast(puntuacion as unsigned)<1", null);
+                List<DatoEstadistico> respaldo=new ArrayList<>();
+               respaldo=Final.conjunto.stream().filter(i->(Integer.valueOf(i.getPuntuacion())<10)).collect(Collectors.toList());
+                Final.conjunto.removeAll(respaldo); */
+
+        DialogoBorrados dialogo=new DialogoBorrados();
+        dialogo.show(getSupportFragmentManager(), "dialogoborrar");
+
+                break;
+
+
+
         }
 
 

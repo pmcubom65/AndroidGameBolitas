@@ -14,7 +14,7 @@
 
 
         android:layout_alignParentTop="true"
-        android:text="Perdiste"
+        android:text="@string/perdiste"
         android:layout_centerHorizontal="true"
         android:textColor="@color/colorAccent"
         android:textSize="70dp"
@@ -35,7 +35,7 @@
         android:gravity="center"
         android:padding="5dp"
 
-        android:text="Hechar otra"
+        android:text="@string/hechar_otra"
         android:textColor="@android:color/background_light"
         android:textStyle="bold"
         android:layout_marginBottom="10dp"/>
@@ -63,7 +63,7 @@
         android:onClick="dameEstadisticas"
         android:layout_centerHorizontal="true"
         android:padding="5dp"
-        android:text="Estadisticas"
+        android:text="@string/estadisticasb"
         android:textColor="@android:color/background_light"
         android:textStyle="bold" />
 

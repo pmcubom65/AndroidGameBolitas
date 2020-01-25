@@ -33,7 +33,7 @@
         android:id="@+id/textView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Fecha"
+        android:text="@string/fechae"
         android:textColor="@color/miblanco"
         android:paddingRight="5dp"
         android:paddingLeft="10dp"
@@ -44,7 +44,7 @@
         android:id="@+id/textView2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Score"
+        android:text="@string/scoreest"
         android:textColor="@color/miblanco"
         android:layout_toRightOf="@id/textView"
 
@@ -60,7 +60,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textColor="@color/miblanco"
-        android:text="Tiempo(s)"
+        android:text="@string/tiempo_s"
         android:layout_marginRight="5dp"
         android:layout_marginLeft="5dp"
         android:paddingRight="5dp"
@@ -70,15 +70,15 @@
     <TextView
         android:id="@+id/textView4"
 
-        android:layout_toRightOf="@id/textView3"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:textColor="@color/miblanco"
-        android:text="Juego"
+        android:layout_toRightOf="@id/textView3"
+        android:paddingLeft="40dp"
+        android:text="@string/juegoest"
 
-        android:paddingLeft="20dp"
-        android:paddingRight="2dp"
-       />
+        android:textColor="@color/miblanco"
+
+        />
 
 </RelativeLayout>
 

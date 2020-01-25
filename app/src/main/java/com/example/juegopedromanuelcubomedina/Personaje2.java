@@ -28,6 +28,8 @@ public class Personaje2 extends View {
 
     private Bitmap backgroundfondo;
     private Bitmap gota;
+    private Bitmap gota2;
+    private Bitmap gota3;
     private Paint score=new Paint();
     private Bitmap[] vida=new Bitmap[2];
     private int monoy=0;
@@ -37,7 +39,9 @@ public class Personaje2 extends View {
     private int canvasancho, canvasalto;
     public boolean tocar;
     private int resultado;
-    private int gotax=30, gotay, gotav=-40;
+    private int gotax=30, gotay, gotav=-20;
+    private int gota2x=100, gota2y, gota2v=-20;
+    private int gota3x=300, gota3y, gota3v=-20;
     private Paint gotapaint=new Paint();
     private int contador;
     long tiempo;
@@ -53,7 +57,8 @@ public class Personaje2 extends View {
 
         mono= BitmapFactory.decodeResource(getResources(),R.drawable.cup);
         gota=BitmapFactory.decodeResource(getResources(),R.drawable.drop);
-
+        gota2=BitmapFactory.decodeResource(getResources(),R.drawable.drop);
+        gota3=BitmapFactory.decodeResource(getResources(),R.drawable.drop);
         nino= BitmapFactory.decodeResource(getResources(),R.drawable.ninodesnudo);
 
 
@@ -95,10 +100,10 @@ public class Personaje2 extends View {
             monox=maximo-velocidad;
         }
         if (contador==1) {
-            monoy=monoy-200;
+            monoy=monoy-350;
         }
         if (contador==2){
-            monoy=monoy-270;
+            monoy=monoy-860;
         }
         velocidad=velocidad+1;
 
@@ -112,23 +117,61 @@ public class Personaje2 extends View {
         }
 
         gotay=gotay-gotav;
+        gota2y=gota2y-gota2v;
+        gota3y=gota3y-gota3v;
         if (haTocado(gotax,gotay)) {
             resultado++;
             suena();
             gotay=-10;
 
-        } else if (gotay>canvasalto) {
-            contador++;
-            gotay=-10;
-            mp = MediaPlayer.create(getContext(), R.raw.metallic);
-            mp.start();
+        }    else if (haTocado(gota2x,gota2y)) {
+            resultado++;
+            suena();
+            gota2y=-10;
+
+        } else if (haTocado(gota3x,gota3y)) {
+            resultado++;
+            suena();
+            gota3y=-10;
 
         }
+
+        else if (gotay>canvasalto) {
+
+            contador++;
+            gotay=-10;
+            suenaerror();
+
+        }     else if (gota2y>canvasalto) {
+
+            contador++;
+            gota2y=-10;
+            suenaerror();
+
+        }
+        else if (gota3y>canvasalto) {
+
+            contador++;
+            gota3y=-10;
+            suenaerror();
+
+        }
+
 
 
         if (gotay<0) {
             gotay=-10;
             gotax=(int) Math.floor(Math.random()*(maximo-(minimo+7)))+(minimo+7);
+
+
+        } else if (gota2y<0) {
+            gota2y=-10;
+            gota2x=(int) Math.floor(Math.random()*(maximo-(minimo+7)))+(minimo+7);
+
+
+        } else if (gota3y<0) {
+            gota3y=-10;
+            gota3x=(int) Math.floor(Math.random()*(maximo-(minimo+7)))+(minimo+7);
 
 
         }
@@ -137,7 +180,8 @@ public class Personaje2 extends View {
         canvas.drawText("Score: "+resultado, 20, 60, score);
 
       canvas.drawBitmap(gota,gotax,gotay,null);
-
+        canvas.drawBitmap(gota2,gota2x,gota2y,null);
+        canvas.drawBitmap(gota3,gota3x,gota3y,null);
 
 
 
@@ -160,20 +204,21 @@ public class Personaje2 extends View {
                 canvas.drawBitmap(vida[1], 580, 10, null);
                 canvas.drawBitmap(vida[0], 680, 10, null);
                 canvas.drawBitmap(vida[0], 780, 10, null);
-                canvas.drawRect(0,canvasalto-500,canvasancho,canvasalto,paintrect);
+                canvas.drawRect(0,canvasalto-650,canvasancho,canvasalto,paintrect);
 
                 break;
             case 2:
                 canvas.drawBitmap(vida[1], 580, 10, null);
                 canvas.drawBitmap(vida[1], 680, 10, null);
                 canvas.drawBitmap(vida[0], 780, 10, null);
-                canvas.drawRect(0,canvasalto-600,canvasancho,canvasalto,paintrect);
+                canvas.drawRect(0,canvasalto-1150,canvasancho,canvasalto,paintrect);
 
                 break;
             case 3:
                 canvas.drawBitmap(vida[1], 580, 10, null);
                 canvas.drawBitmap(vida[1], 680, 10, null);
                 canvas.drawBitmap(vida[1], 780, 10, null);
+                canvas.drawRect(0,canvasalto-950,canvasancho,canvasalto,paintrect);
                 int puntuacionfinal=resultado;
 
           //      tiempofinal=System.currentTimeMillis()-tiempo;
@@ -208,6 +253,16 @@ public class Personaje2 extends View {
 
     }
 
+
+    public void suenaerror() {
+        mp = MediaPlayer.create(getContext(), R.raw.metallic);
+        mp.start();
+    }
+
+
+
+
+
     public void suena() {
         mp = MediaPlayer.create(getContext(), R.raw.coin);
         mp.start();
@@ -233,7 +288,7 @@ public class Personaje2 extends View {
 
             tocar=true;
             velocidad=10;
-          monox=(monox<event.getX()) ? (int) event.getX()+velocidad: (int) event.getX()-velocidad;
+          monox=(monox<event.getX()) ? (int) event.getX()+velocidad: (int) event.getX()-velocidad-30;
         }
         return true;
     }

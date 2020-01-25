@@ -4,4 +4,15 @@
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="perdiste">Perdiste</string>
+    <string name="hechar_otra">Hechar otra</string>
+    <string name="estadisticasb">Estadisticas</string>
+    <string name="fechae">Fecha</string>
+    <string name="tiempo_s">Tiempo(s)</string>
+    <string name="juegoest">Juego</string>
+    <string name="scoreest">Score</string>
+    <string name="juego_de_android">Juego de Android</string>
+    <string name="elija_uno_de_los_dos_juegos">Elija uno de los dos juegos</string>
+    <string name="scorebor">Score</string>
+    <string name="teclee_el_score_m_s_peque_o_que_este_almacenado_se_borraran_los_menores_a_ese">Teclee el score más pequeño que quiera que esté almacenado (se borraran los menores a ese)</string>
 </resources>
