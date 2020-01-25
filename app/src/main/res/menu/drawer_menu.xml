@@ -5,14 +5,14 @@
 
         <item
             android:id="@+id/mihome"
-            android:title="Home"
+            android:title="@string/home_h"
             android:icon="@drawable/home"
 
 
 />
         <item
             android:id="@+id/mimapa"
-            android:title="Mapas"
+            android:title="@string/mapas_m"
             android:icon="@mipmap/mapa"
 
             />
@@ -21,7 +21,7 @@
 
         <item
             android:id="@+id/misport"
-            android:title="Cambiar de Juego"
+            android:title="@string/cambiar_de_juego_m"
             android:icon="@drawable/sports"
 
             />
@@ -31,7 +31,7 @@
 
         <item
             android:id="@+id/miexit"
-            android:title="Exit"
+            android:title="@string/exit_e"
             android:icon="@drawable/exit"
 
             />

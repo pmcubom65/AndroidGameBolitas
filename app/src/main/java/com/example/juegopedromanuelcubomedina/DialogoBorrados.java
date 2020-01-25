@@ -9,10 +9,13 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.DialogFragment;
+
+import com.google.android.material.snackbar.Snackbar;
 
 public class DialogoBorrados extends DialogFragment {
 
@@ -48,6 +51,8 @@ public class DialogoBorrados extends DialogFragment {
                     int test=Integer.valueOf(revisar);
                     mivalor.onvalorelegido(miedit.getText().toString());
                 } catch (NumberFormatException nfe) {
+                        Snackbar snackbar=Snackbar.make(getActivity().findViewById(R.id.poneraqui),"El número escrito no es un número", Snackbar.LENGTH_LONG);
+                        snackbar.show();
 
                 }
 

@@ -5,7 +5,7 @@
 
 
     <item android:id="@+id/indicador2"
-        android:title="Ordenar por tiempo"
+        android:title="@string/ordenar_por_tiempo"
 
         app:showAsAction="never"
 
@@ -13,7 +13,7 @@
 
 
     <item android:id="@+id/indicador3"
-        android:title="Ordenar por score"
+        android:title="@string/ordenar_por_score"
 
         app:showAsAction="never"
 
@@ -21,7 +21,7 @@
 
 
     <item android:id="@+id/indicador4"
-        android:title="Ordenar por fecha"
+        android:title="@string/ordenar_por_fecha"
 
         app:showAsAction="never"
 
@@ -29,7 +29,7 @@
 
 
     <item android:id="@+id/indicador5"
-        android:title="Borrar Registros"
+        android:title="@string/borrar_registros_r"
 
         app:showAsAction="never"
 
