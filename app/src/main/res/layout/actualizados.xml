@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/mono1"
+            android:layout_marginTop="30dp"
+            android:padding="5dp"
+
+        />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="5dp"
+            android:layout_marginTop="20dp"
+            android:textColor="@color/minegro"
+            android:textSize="20sp"
+
+            android:text="@string/teclee_el_score_cuyo_tiempo_quiera_ver_en_minutos"
+            android:textStyle="bold"
+            />
+
+
+
+
+
+    </LinearLayout>
+
+    <EditText
+        android:id="@+id/scoreactualizar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:hint="@string/scorebor"
+        android:inputType="numberDecimal"
+        android:textAlignment="center" />
+</LinearLayout>

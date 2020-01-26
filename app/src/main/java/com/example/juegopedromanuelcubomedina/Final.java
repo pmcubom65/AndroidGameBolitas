@@ -81,7 +81,7 @@ public class Final extends AppCompatActivity  {
             }
         });
         resultado=getIntent().getStringExtra("puntuacion");
-        String segundos=getIntent().getStringExtra("segundos");
+        String segundos=String.format("%s%s",getIntent().getStringExtra("segundos"),"(s)");
         String fecha=getIntent().getStringExtra("fecha");
         String numjuego=(MenuActividad.numerojuego==1)?"Juego 1":"Juego 2";
 
@@ -106,7 +106,7 @@ public class Final extends AppCompatActivity  {
      long row= midatabase.insertWithOnConflict("resultado",null, contentvalues, SQLiteDatabase.CONFLICT_REPLACE);
 
 
-        System.out.println("insertado "+row);
+     //   System.out.println("insertado "+row);
     midatabase.close();
 
 
@@ -143,8 +143,6 @@ public class Final extends AppCompatActivity  {
 
 
         });
-
-
 
     }
 

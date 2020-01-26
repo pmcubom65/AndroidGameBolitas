@@ -37,4 +37,14 @@
 
 
 
+    <item android:id="@+id/indicador6"
+        android:title="@string/actualizar_a_minutos_r"
+
+        app:showAsAction="never"
+
+        />
+
+
+
+
 </menu>

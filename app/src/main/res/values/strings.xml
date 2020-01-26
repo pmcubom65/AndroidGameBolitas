@@ -8,7 +8,7 @@
     <string name="hechar_otra">Hechar otra</string>
     <string name="estadisticasb">Estadisticas</string>
     <string name="fechae">Fecha</string>
-    <string name="tiempo_s">Tiempo(s)</string>
+    <string name="tiempo_s">Tiempo   </string>
     <string name="juegoest">Juego</string>
     <string name="scoreest">Score</string>
     <string name="juego_de_android">Juego de Android</string>
@@ -23,4 +23,6 @@
     <string name="mapas_m">Mapas</string>
     <string name="cambiar_de_juego_m">Cambiar de Juego</string>
     <string name="exit_e">Exit</string>
+    <string name="actualizar_a_minutos_r">Actualizar a minutos</string>
+    <string name="teclee_el_score_cuyo_tiempo_quiera_ver_en_minutos">Teclee el score cuyo tiempo quiera ver en minutos</string>
 </resources>

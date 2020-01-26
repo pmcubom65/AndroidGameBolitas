@@ -10,6 +10,7 @@ import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.ContentValues;
 import android.content.Intent;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
@@ -20,12 +21,17 @@ import android.view.MenuItem;
 import com.google.android.material.navigation.NavigationView;
 import com.google.android.material.snackbar.Snackbar;
 
+import java.text.DecimalFormat;
+import java.text.NumberFormat;
+import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
+import java.util.Locale;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
-public class MostrarEstadisticas extends AppCompatActivity implements DialogoBorrados.ValorTecleado {
+public class MostrarEstadisticas extends AppCompatActivity implements DialogoBorrados.ValorTecleado, DialogoActualizados.Datoaactualizar {
 
     RecyclerView recyclerView;
     RecyclerView.Adapter myAdapter;
@@ -137,9 +143,24 @@ public class MostrarEstadisticas extends AppCompatActivity implements DialogoBor
                 Final.conjunto.sort(new Comparator<DatoEstadistico>() {
                     @Override
                     public int compare(DatoEstadistico o1, DatoEstadistico o2) {
-                       return -(Integer.parseInt(o1.getTiempo())-Integer.parseInt(o2.getTiempo()));
+                       float tiempo1=0,tiempo2=0;
+                        boolean esminuto1= (o1.getTiempo().contains("m"))? true:false;
+                        boolean esminuto2=(o2.getTiempo().contains("m"))? true:false;
 
-                      //  return o1.getTiempo().compareTo(o2.getTiempo());
+
+                        NumberFormat nf = NumberFormat.getInstance(Locale.getDefault());
+
+
+                try {
+                    tiempo1 = (esminuto1) ? (nf.parse(o1.getTiempo().substring(0, o1.getTiempo().indexOf("("))).floatValue() )* (60) : nf.parse(o1.getTiempo().substring(0, o1.getTiempo().indexOf("("))).floatValue();
+                    tiempo2 = (esminuto2) ? (nf.parse(o2.getTiempo().substring(0, o2.getTiempo().indexOf("("))).floatValue() )* (60) : nf.parse(o2.getTiempo().substring(0, o2.getTiempo().indexOf("("))).floatValue();
+                }catch (ParseException pe) {
+                    System.out.println("error parseo");
+                }
+                System.out.println(tiempo1);
+                        System.out.println(tiempo2);
+                       return -(Float.compare((float)tiempo1,(float) tiempo2));
+
                     }
                 });break;
 
@@ -149,15 +170,13 @@ public class MostrarEstadisticas extends AppCompatActivity implements DialogoBor
                     public int compare(DatoEstadistico o1, DatoEstadistico o2) {
                         return -(Integer.parseInt(o1.getPuntuacion())-Integer.parseInt(o2.getPuntuacion()));
 
-
-                        //     return o1.getPuntuacion().compareTo(o2.getPuntuacion());
                     }
                 });break;
             case R.id.indicador4:
                 Final.conjunto.sort(new Comparator<DatoEstadistico>() {
                     @Override
                     public int compare(DatoEstadistico o1, DatoEstadistico o2) {
-                        return o1.getFecha().compareTo(o2.getFecha());
+                        return -(o1.getFecha().compareTo(o2.getFecha()));
                     }
                 });break;
 
@@ -167,12 +186,7 @@ public class MostrarEstadisticas extends AppCompatActivity implements DialogoBor
 
 
             case R.id.indicador5:
-         /*          Resultados r=new Resultados(this);
-             SQLiteDatabase midatabase=r.getWritableDatabase();
-                midatabase.delete("resultado", "cast(puntuacion as unsigned)<1", null);
-                List<DatoEstadistico> respaldo=new ArrayList<>();
-               respaldo=Final.conjunto.stream().filter(i->(Integer.valueOf(i.getPuntuacion())<10)).collect(Collectors.toList());
-                Final.conjunto.removeAll(respaldo); */
+
 
         DialogoBorrados dialogo=new DialogoBorrados();
         dialogo.show(getSupportFragmentManager(), "dialogoborrar");
@@ -180,7 +194,12 @@ public class MostrarEstadisticas extends AppCompatActivity implements DialogoBor
                 break;
 
 
+            case R.id.indicador6:
 
+            DialogoActualizados dialogoActualizados=new DialogoActualizados();
+            dialogoActualizados.show(getSupportFragmentManager(), "dialogoactualizar");
+
+                break;
         }
 
 
@@ -200,10 +219,64 @@ public class MostrarEstadisticas extends AppCompatActivity implements DialogoBor
                 List<DatoEstadistico> respaldo=new ArrayList<>();
                respaldo=Final.conjunto.stream().filter(i->(Integer.valueOf(i.getPuntuacion())<Integer.valueOf(s))).collect(Collectors.toList());
                 Final.conjunto.removeAll(respaldo);
+                midatabase.close();
 
         Snackbar snackbar=Snackbar.make(recyclerView,"Se han borrado "+String.valueOf(filas)+ " registros", Snackbar.LENGTH_INDEFINITE);
         snackbar.show();
 
+
+    }
+
+    @Override
+    public void onScoreAActualizar(String s) {
+        DatoEstadistico de=null;
+        try {
+            int scoreelegido = Integer.valueOf(s);
+            Resultados r = new Resultados(this);
+            SQLiteDatabase midatabase = r.getWritableDatabase();
+
+            ContentValues values = new ContentValues();
+            //     DatoEstadistico de=Final.conjunto.stream().filter(i->(Integer.valueOf(i.getPuntuacion())==scoreelegido)).findFirst().get();
+
+            Optional<DatoEstadistico> result = Final.conjunto.stream().filter(i -> (Integer.valueOf(i.getPuntuacion()) == scoreelegido)).findFirst();
+            if (result.isPresent()) {
+                de = result.get();
+                String tiempode=de.getTiempo();
+
+                int tiemposegundos = Integer.valueOf(tiempode.substring(0, tiempode.indexOf("(")));
+
+                String formatted = String.format("%.2f",(float) tiemposegundos / 60);
+
+
+                String valorminutos = String.format("%s%s", formatted, "(min)");
+
+                values.put("tiempo", valorminutos);
+                int filas = midatabase.update("resultado", values, "cast(puntuacion as unsigned)==" + scoreelegido, null);
+                Final.conjunto.stream().filter(i -> (Integer.valueOf(i.getPuntuacion()) == scoreelegido)).forEach(i -> i.setTiempo(valorminutos));
+
+
+                myAdapter=new MiAdapter(this, Final.conjunto);
+
+                recyclerView.setAdapter(myAdapter);
+
+
+                Snackbar snackbar = Snackbar.make(recyclerView, "Se han actualizado " + filas + " registros", Snackbar.LENGTH_INDEFINITE);
+                snackbar.show();
+
+
+                midatabase.close();
+
+
+            } else {
+                Snackbar snackbar = Snackbar.make(recyclerView, "No se ha encontrado dicho score", Snackbar.LENGTH_INDEFINITE);
+                snackbar.show();
+            }
+
+
+        }catch (Exception e) {
+            Snackbar snackbar=Snackbar.make(recyclerView,"El número escrito no es un número entero o ya está en minutos", Snackbar.LENGTH_LONG);
+            snackbar.show();
+        }
 
     }
 }
