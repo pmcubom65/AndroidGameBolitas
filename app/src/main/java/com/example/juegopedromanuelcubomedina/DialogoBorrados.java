@@ -46,9 +46,14 @@ public class DialogoBorrados extends DialogFragment {
         builder.setPositiveButton("Aceptar", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
-
-                    mivalor.onvalorelegido(miedit.getText().toString());
-
+            try {
+                String revisar = miedit.getText().toString();
+                int test = Integer.parseInt(revisar);
+                mivalor.onvalorelegido(revisar);
+            }catch ( Exception e) {
+                Snackbar snackbar = Snackbar.make(getActivity().findViewById(R.id.poneraqui), "No se ha encontrado dicho score", Snackbar.LENGTH_INDEFINITE);
+                snackbar.show();
+            }
 
             }
         });

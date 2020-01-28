@@ -220,6 +220,9 @@ public class MostrarEstadisticas extends AppCompatActivity implements DialogoBor
                respaldo=Final.conjunto.stream().filter(i->(Integer.valueOf(i.getPuntuacion())<Integer.valueOf(s))).collect(Collectors.toList());
                 Final.conjunto.removeAll(respaldo);
                 midatabase.close();
+                myAdapter=new MiAdapter(this, Final.conjunto);
+
+                recyclerView.setAdapter(myAdapter);
 
         Snackbar snackbar=Snackbar.make(recyclerView,"Se han borrado "+String.valueOf(filas)+ " registros", Snackbar.LENGTH_INDEFINITE);
         snackbar.show();

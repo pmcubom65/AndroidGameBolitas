@@ -52,7 +52,15 @@ public class DialogoActualizados extends DialogFragment {
 
                 String revisar=miedit.getText().toString();
 
-                miscoreactualizar.onScoreAActualizar(revisar);
+                try {
+                    int test=Integer.parseInt(revisar);
+                    miscoreactualizar.onScoreAActualizar(revisar);
+                }catch (Exception e) {
+                    Snackbar snackbar = Snackbar.make(getActivity().findViewById(R.id.poneraqui), "No se ha encontrado dicho score", Snackbar.LENGTH_INDEFINITE);
+                    snackbar.show();
+                }
+
+
 
 
 
