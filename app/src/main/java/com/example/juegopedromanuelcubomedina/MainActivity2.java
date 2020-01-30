@@ -2,6 +2,7 @@ package com.example.juegopedromanuelcubomedina;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.os.Handler;
@@ -11,10 +12,12 @@ import java.util.TimerTask;
 
 public class MainActivity2 extends AppCompatActivity {
 
-    private Personaje personaje;
+
+    //nos permite procesar runnable objects asociados a un thread, se comunica con el main thread de la aplicacion
     private Handler handler=new Handler();
     private static final long interval=30;
-    MediaPlayer mediaPlayer;
+
+    Intent intent;
 
 
     private Personaje2 personaje2;
@@ -25,43 +28,45 @@ public class MainActivity2 extends AppCompatActivity {
         super.onCreate(savedInstanceState);
 
 
-        // personaje=new Personaje(this);
         personaje2=new Personaje2(this);
-        mediaPlayer = MediaPlayer.create(getApplicationContext(), R.raw.battle);
 
-        mediaPlayer.start();
         setContentView(personaje2);
 
-
+//se genera una tarea repetitiva new Timer().schedule(task, after); (tarea, tiempo ejecución inicial)
         Timer timer=new Timer();
         timer.schedule(new TimerTask() {
             @Override
             public void run() {
-                handler.post(new Runnable() {
+                handler.post(new Runnable() { //se va añadiendo a la cola de procesos
                     @Override
                     public void run() {
-                        //            personaje.invalidate();
-                        personaje2.invalidate();
+
+                        personaje2.invalidate(); //invalidamos el canvas para que vuelva a llamarse
 
                     }
                 });
             }
         },0,interval);
-
+        intent=new Intent(this, ServicioMusica.class);
+        startService(intent);
     }
 
 
     @Override
     protected void onPause() {
         super.onPause();
-        mediaPlayer.stop();
-        mediaPlayer.release();
+
     }
 
     @Override
     protected void onRestart() {
         super.onRestart();
-        mediaPlayer.stop();
-        mediaPlayer.release();
+
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        stopService(intent);
     }
 }

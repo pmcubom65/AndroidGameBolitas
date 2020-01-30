@@ -18,12 +18,12 @@ import java.util.TimerTask;
 public class MainActivity extends AppCompatActivity {
 
     private Personaje personaje;
-    private Handler handler=new Handler();
+    private Handler handler=new Handler(); //nos permite procesar runnable objects asociados a un thread, se comunica con el main thread de la aplicacion
     private static final long interval=30;
-    MediaPlayer mediaPlayer;
 
+    Timer timer;
+    Intent intent;
 
- //   private Personaje2 personaje2;
 
 
     @Override
@@ -32,42 +32,53 @@ public class MainActivity extends AppCompatActivity {
 
 
          personaje=new Personaje(this);
-        // personaje2=new Personaje2(this);
-        mediaPlayer = MediaPlayer.create(getApplicationContext(), R.raw.battle);
 
-        mediaPlayer.start();
         setContentView(personaje);
 
-
-        Timer timer=new Timer();
+        //se genera una tarea repetitiva new Timer().schedule(task, after); (tarea, tiempo ejecución inicial)
+        timer=new Timer();
         timer.schedule(new TimerTask() {
             @Override
             public void run() {
-                handler.post(new Runnable() {
+                handler.post(new Runnable() {   //se va añadiendo a la cola de procesos
                     @Override
                     public void run() {
-                      personaje.invalidate();
-              //          personaje2.invalidate();
+                      personaje.invalidate();   //invalidamos el canvas para que vuelva a llamarse
+
 
                     }
                 });
             }
         },0,interval);
-
+        intent=new Intent(this, ServicioMusica.class);
+        startService(intent);
     }
 
 
     @Override
     protected void onPause() {
         super.onPause();
-        mediaPlayer.stop();
-        mediaPlayer.release();
+
+
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+
     }
 
     @Override
     protected void onRestart() {
         super.onRestart();
-        mediaPlayer.stop();
-        mediaPlayer.release();
+
+    }
+
+
+    @Override
+    protected void onDestroy() {
+
+        super.onDestroy();
+        stopService(intent);
     }
 }

@@ -277,7 +277,7 @@ public class MostrarEstadisticas extends AppCompatActivity implements DialogoBor
 
 
         }catch (Exception e) {
-            Snackbar snackbar=Snackbar.make(recyclerView,"El número escrito no es un número entero o ya está en minutos", Snackbar.LENGTH_LONG);
+            Snackbar snackbar=Snackbar.make(recyclerView,"Ya está en minutos", Snackbar.LENGTH_LONG);
             snackbar.show();
         }
 

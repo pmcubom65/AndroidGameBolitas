@@ -57,8 +57,6 @@ public class TitularFragment extends ListFragment {
 
         setListAdapter(new ArrayAdapter<String>(getActivity(), android.R.layout.simple_list_item_1, data));
 
-
-
     }
 
 

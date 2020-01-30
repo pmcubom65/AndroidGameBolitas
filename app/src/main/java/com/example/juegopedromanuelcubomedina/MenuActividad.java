@@ -34,11 +34,6 @@ public class MenuActividad extends AppCompatActivity implements TitularFragment.
 
         milista=(ListView) findViewById(R.id.lalista);
         laimagen=(ImageView) findViewById(R.id.laimagen);
-     /*   juegos[0]="Juego 1";
-        juegos[1]="Juego 2";
-
-        ArrayAdapter<String> arrayAdapter=new ArrayAdapter(this, android.R.layout.simple_list_item_1, juegos);
-        milista.setAdapter(arrayAdapter);*/
 
         descriptions=new ArrayList<>();
         descriptions.add(R.drawable.inicio);
@@ -62,7 +57,6 @@ public class MenuActividad extends AppCompatActivity implements TitularFragment.
                     miDialogo.show(getSupportFragmentManager(),"mi dialogo");
 
                 }
-
 
             }
         });
