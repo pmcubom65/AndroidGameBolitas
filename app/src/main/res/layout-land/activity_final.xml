@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".Final"
+    android:background="@drawable/fondouno">
+
+
+    <TextView
+        android:id="@+id/fin"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+
+
+        android:layout_alignParentTop="true"
+        android:layout_marginTop="44dp"
+        android:text="@string/perdiste"
+        android:textAlignment="center"
+        android:textColor="@color/colorAccent"
+        android:textSize="70dp"
+        android:textStyle="bold" />
+
+    <Button
+        android:id="@+id/empezar"
+        android:layout_width="200dp"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/fin"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="2dp"
+        android:background="@color/colorAccent"
+        android:gravity="center"
+        android:padding="5dp"
+
+        android:text="@string/hechar_otra"
+        android:textColor="@android:color/background_light"
+        android:textStyle="bold"
+        android:layout_marginBottom="10dp"/>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/empezar"
+        android:id="@+id/puntuación"
+        android:textSize="20dp"
+        android:layout_centerHorizontal="true"
+        android:textAlignment="center"
+
+        android:layout_marginBottom="10dp"
+    android:textColor="@android:color/background_light"
+        />
+
+
+    <Button
+        android:id="@+id/estadisticas"
+        android:layout_width="200dp"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/puntuación"
+        android:background="@color/colorAccent"
+        android:onClick="dameEstadisticas"
+        android:layout_centerHorizontal="true"
+        android:padding="5dp"
+        android:text="@string/estadisticasb"
+        android:textColor="@android:color/background_light"
+        android:textStyle="bold" />
+
+
+
+
+</RelativeLayout>

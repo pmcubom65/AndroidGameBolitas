@@ -60,19 +60,17 @@ public class Personaje extends View implements GestureDetector.OnDoubleTapListen
     public Personaje(Context context)
 
     {
-
         super(context);
-
 
         this.migesture=new GestureDetectorCompat(getContext(),this);
         migesture.setOnDoubleTapListener(this);
 
         mono[0]= BitmapFactory.decodeResource(getResources(),R.drawable.mono2);
         mono[1]= BitmapFactory.decodeResource(getResources(),R.drawable.mono1);
-        nino= BitmapFactory.decodeResource(getResources(),R.drawable.ninodesnudo);
+
         resultado=0;
         backgroundfondo= BitmapFactory.decodeResource(getResources(),R.drawable.fondo2);
-
+        nino= BitmapFactory.decodeResource(getResources(),R.drawable.ninodesnudo);
         cocopaint.setColor(Color.GRAY);
         cocopaint.setAntiAlias(false);
 
@@ -128,9 +126,6 @@ public class Personaje extends View implements GestureDetector.OnDoubleTapListen
         if (monoy>maximo) {
             monoy=maximo;
         }
-
-
-
 
         velocidad=velocidad+4;
         ninov=ninov+1;
