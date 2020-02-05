@@ -76,8 +76,6 @@ public class Personaje2 extends View {
         tiempo=System.currentTimeMillis();
         tiempofinal=0;
 
-
-
     }
 
     @Override
@@ -100,10 +98,14 @@ public class Personaje2 extends View {
             monox=maximo-velocidad;
         }
         if (contador==1) {
-            monoy=monoy-350;
+            int subir =(int) Math.floor(canvasalto*0.2f);
+            //monoy=monoy-350;
+            monoy=monoy-subir;
         }
         if (contador==2){
-            monoy=monoy-860;
+            int subir =(int) Math.floor(canvasalto*0.5f);
+            //monoy=monoy-860;
+            monoy=monoy-subir;
         }
         velocidad=velocidad+1;
 
@@ -191,8 +193,11 @@ public class Personaje2 extends View {
     paintrect.setColor(Color.BLUE);
     //canvas.drawRect(0,canvasalto-300,canvasancho,canvasalto,paintrect);
 
-        canvas.drawRect(0,canvasalto-canvasalto*0.176f,canvasancho,canvasalto,paintrect);
-    canvas.drawBitmap(nino, canvasancho-200, canvasalto-100, null);
+     //   canvas.drawRect(0,canvasalto-canvasalto*0.176f,canvasancho,canvasalto,paintrect);
+
+        canvas.drawRect(0,monoy+mono.getHeight(),canvasancho,canvasalto,paintrect);
+
+        canvas.drawBitmap(nino, canvasancho-200, canvasalto-100, null);
 
 
 
@@ -206,25 +211,28 @@ public class Personaje2 extends View {
                 canvas.drawBitmap(vida[1], 580, 10, null);
                 canvas.drawBitmap(vida[0], 680, 10, null);
                 canvas.drawBitmap(vida[0], 780, 10, null);
-                canvas.drawRect(0,canvasalto-canvasalto*0.381f,canvasancho,canvasalto,paintrect);
-                //canvas.drawRect(0,canvasalto-650,canvasancho,canvasalto,paintrect);
+                canvas.drawRect(0,monoy+mono.getHeight(),canvasancho,canvasalto,paintrect);
+                canvas.drawBitmap(nino, canvasancho-200, canvasalto-100, null);
 
                 break;
             case 2:
                 canvas.drawBitmap(vida[1], 580, 10, null);
                 canvas.drawBitmap(vida[1], 680, 10, null);
                 canvas.drawBitmap(vida[0], 780, 10, null);
-                canvas.drawRect(0,canvasalto-1150,canvasancho,canvasalto,paintrect);
-
+             //   canvas.drawRect(0,canvasalto-1150,canvasancho,canvasalto,paintrect);
+                canvas.drawRect(0,monoy+mono.getHeight(),canvasancho,canvasalto,paintrect);
+                canvas.drawBitmap(nino, canvasancho-200, canvasalto-100, null);
                 break;
             case 3:
                 canvas.drawBitmap(vida[1], 580, 10, null);
                 canvas.drawBitmap(vida[1], 680, 10, null);
                 canvas.drawBitmap(vida[1], 780, 10, null);
-                canvas.drawRect(0,canvasalto-1150,canvasancho,canvasalto,paintrect);
+                canvas.drawRect(0,monoy+mono.getHeight(),canvasancho,canvasalto,paintrect);
+                canvas.drawBitmap(nino, canvasancho-200, canvasalto-100, null);
+         //       canvas.drawRect(0,canvasalto-1150,canvasancho,canvasalto,paintrect);
                 int puntuacionfinal=resultado;
 
-          //      tiempofinal=System.currentTimeMillis()-tiempo;
+
             mp.release();
                 String segundos=String.valueOf((int) Math.round(Math.ceil((System.currentTimeMillis()-tiempo)/1000)));
                 LocalDate ld=LocalDate.now();
