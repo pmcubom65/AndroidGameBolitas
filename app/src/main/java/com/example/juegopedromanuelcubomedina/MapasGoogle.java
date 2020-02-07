@@ -315,8 +315,6 @@ public class MapasGoogle extends FragmentActivity implements OnMapReadyCallback{
 
         ContentValues contentvalues2=new ContentValues();
 
-
-
         contentvalues2.put("puntuacion", "Score: "+punt);
         contentvalues2.put("latitud", String.valueOf(lttud));
         contentvalues2.put("longitud", String.valueOf(longtud));
@@ -325,17 +323,12 @@ public class MapasGoogle extends FragmentActivity implements OnMapReadyCallback{
         long row= midatabase.insertWithOnConflict("lospuntos",null, contentvalues2, SQLiteDatabase.CONFLICT_REPLACE);
 
 
-           System.out.println("insertado "+row);
         midatabase.close();
 
 
         contentvalues2.clear();
 
     }
-
-
-
-
 
 
     public void rellenarTodo() {
@@ -346,9 +339,9 @@ public class MapasGoogle extends FragmentActivity implements OnMapReadyCallback{
         SQLiteDatabase databaselectura=re.getReadableDatabase();
         String[] columnas={"puntuacion", "latitud", "longitud"};
         Cursor cursor= databaselectura.query("lospuntos",columnas,null,null,null,null,null);
-        cursor.moveToFirst();
 
-        if (cursor.moveToNext()) {
+
+        if (cursor.moveToFirst()) {
 
             do {
 
@@ -369,37 +362,18 @@ public class MapasGoogle extends FragmentActivity implements OnMapReadyCallback{
 
 
 
-
-
-
-
-
-
-
-
-
-    /**
-     * Manipulates the map once available.
-     * This callback is triggered when the map is ready to be used.
-     * This is where we can add markers or lines, add listeners or move the camera. In this case,
-     * we just add a marker near Sydney, Australia.
-     * If Google Play services is not installed on the device, the user will be prompted to install
-     * it inside the SupportMapFragment. This method will only be triggered once the user has
-     * installed Google Play services and returned to the app.
-     */
     @Override
     public void onMapReady(GoogleMap googleMap) {
         mMap = googleMap;
 
-        // Add a marker in Sydney and move the camera
-//        LatLng sydney = new LatLng(-34, 151);
-//        mMap.addMarker(new MarkerOptions().position(sydney).title("Marker in Sydney"));
-//        mMap.moveCamera(CameraUpdateFactory.newLatLng(sydney));
+
     }
 
     @Override
     protected void onStop() {
+
         super.onStop();
+        finish();
         locationManager.removeUpdates(locationListener);
     }
 }

@@ -68,6 +68,7 @@ public class MenuActividad extends AppCompatActivity implements TitularFragment.
                     Intent intent=new Intent(MenuActividad.this, MainActivity2.class);
                     startActivity(intent);
                 } else if (indice==2) {
+                    System.out.println("el indice es"+indice);
                     Intent intent=new Intent(MenuActividad.this, MostrarEstadisticas.class);
                    rellenarTodo();
 
@@ -95,31 +96,32 @@ public class MenuActividad extends AppCompatActivity implements TitularFragment.
         SQLiteDatabase databaselectura=r.getReadableDatabase();
         String[] columnas={"fecha", "puntuacion", "tiempo", "juego"};
         Cursor cursor= databaselectura.query("resultado",columnas,null,null,null,null,null);
-        cursor.moveToFirst();
+
         LocalDate ld;
         Final.conjunto.clear();
-        do {
+        if ( cursor.moveToFirst()) {
+            do {
 
 
-            ld=LocalDate.parse(cursor.getString(0), dtf);
-            String score=cursor.getString(1);
-            String tiempo=cursor.getString(2);
-            String numjuegodb=cursor.getString(3);
+                ld = LocalDate.parse(cursor.getString(0), dtf);
+                String score = cursor.getString(1);
+                String tiempo = cursor.getString(2);
+                String numjuegodb = cursor.getString(3);
 
-            Final.conjunto.add(new DatoEstadistico(ld,score ,tiempo, numjuegodb));
-
-
-        }while (cursor.moveToNext());
-
-        Collections.sort(Final.conjunto, new Comparator<DatoEstadistico>() {
-            @Override
-            public int compare(DatoEstadistico o1, DatoEstadistico o2) {
-                return o1.getFecha().compareTo(o2.getFecha());
-            }
+                Final.conjunto.add(new DatoEstadistico(ld, score, tiempo, numjuegodb));
 
 
-        });
+            } while (cursor.moveToNext());
 
+            Collections.sort(Final.conjunto, new Comparator<DatoEstadistico>() {
+                @Override
+                public int compare(DatoEstadistico o1, DatoEstadistico o2) {
+                    return o1.getFecha().compareTo(o2.getFecha());
+                }
+
+
+            });
+        }
     }
 
 

@@ -13,6 +13,7 @@
     <string name="scoreest">Score</string>
     <string name="juego_de_android">Juego de Android</string>
     <string name="elija_uno_de_los_dos_juegos">Elija uno de los dos juegos</string>
+    <string name="elija_uno_de_los_dos_juegos2">Elija si quiere ver los marcadores o grabar el último score conseguido como marcador</string>
     <string name="scorebor">Score</string>
     <string name="teclee_el_score_m_s_peque_o_que_este_almacenado_se_borraran_los_menores_a_ese">Teclee el score más pequeño que quiera que esté almacenado (se borraran los menores a ese)</string>
     <string name="borrar_registros_r">Borrar Registros</string>
@@ -20,7 +21,7 @@
     <string name="ordenar_por_score">Ordenar por Score</string>
     <string name="ordenar_por_fecha">Ordenar por Fecha</string>
     <string name="home_h">Home</string>
-    <string name="mapas_m">Mapas</string>
+    <string name="mapas_m">Gestionar Marcadores</string>
     <string name="cambiar_de_juego_m">Cambiar de Juego</string>
     <string name="exit_e">Exit</string>
     <string name="actualizar_a_minutos_r">Actualizar a minutos</string>

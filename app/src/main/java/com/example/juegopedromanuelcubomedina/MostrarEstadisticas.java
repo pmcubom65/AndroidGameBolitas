@@ -41,7 +41,7 @@ public class MostrarEstadisticas extends AppCompatActivity implements DialogoBor
     private Toolbar toolbar;
     private DrawerLayout midrawer;
     private NavigationView minavegacion;
-    String resultado;
+    static String resultado;
     private boolean ahome=false;
 
     @Override
@@ -117,10 +117,13 @@ public class MostrarEstadisticas extends AppCompatActivity implements DialogoBor
 
     public void cambioGps() {
 
-        Intent algps=new Intent(this, MapasGoogle.class);
+        MiDialogo2   md2=new MiDialogo2();
+        md2.show(getSupportFragmentManager(), "dialogomarcador");
+
+  /*      Intent algps=new Intent(this, MapasGoogle.class);
         algps.putExtra("score",resultado);
 
-        startActivity(algps);
+        startActivity(algps); */
 
     }
 
