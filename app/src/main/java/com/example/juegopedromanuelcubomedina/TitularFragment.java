@@ -3,6 +3,7 @@ package com.example.juegopedromanuelcubomedina;
 
 import android.content.Context;
 import android.os.Bundle;
+import android.text.Layout;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -54,9 +55,11 @@ public class TitularFragment extends ListFragment {
         ArrayList<String> data=new ArrayList<>();
         data.add("Juego 1: Recoge las bolas, esquiva las rojas");
         data.add("Juego 2: Recoge todas las gotas");
+        data.add("Ir a Estadisticas");
 
-        setListAdapter(new ArrayAdapter<String>(getActivity(), android.R.layout.simple_list_item_1, data));
 
+
+        setListAdapter(new ArrayAdapter<String>(getActivity(), R.layout.mitexto, data));
     }
 
 

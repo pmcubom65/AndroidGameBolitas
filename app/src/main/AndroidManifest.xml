@@ -19,7 +19,7 @@
         android:theme="@style/AppTheme">
         <activity android:name=".MostrarEstadisticas" />
         <activity android:name=".MainActivity2" />
-        <activity android:name=".MenuActividad" />
+        <activity android:name=".MenuActividad"    />
         <!--
              The API key for Google Maps-based APIs is defined as a string resource.
              (See the file "res/values/google_maps_api.xml").
@@ -44,6 +44,7 @@
             </intent-filter>
         </activity>
         <activity android:name=".MainActivity" />
+
         <service android:name=".ServicioMusica" android:exported="false" />
 
 

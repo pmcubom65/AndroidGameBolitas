@@ -6,22 +6,37 @@
     android:layout_height="match_parent"
     tools:context=".MenuActividad"
     android:orientation="vertical"
-    >
+    android:baselineAligned="false"
+    android:background="@color/milila">
 
-    <fragment
-        android:id="@+id/fragmenttitular"
-        android:name="com.example.juegopedromanuelcubomedina.TitularFragment"
-        android:layout_width="match_parent"
-        android:layout_height="550dp"
-        tools:layout_editor_absoluteX="253dp"
-        tools:layout_editor_absoluteY="152dp"
-        android:layout_weight="4.5"/>
-
-    <fragment
-        android:id="@+id/fragmentdetail"
-        android:name="com.example.juegopedromanuelcubomedina.DetailFragment"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_weight="1"
+    <include layout="@layout/mitoolbar"
         />
+
+    <LinearLayout
+
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="horizontal"
+        android:background="@color/milila">
+
+        <fragment
+            android:id="@+id/fragmenttitular"
+            android:name="com.example.juegopedromanuelcubomedina.TitularFragment"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.5"
+            tools:layout="@layout/titular_fragment_layout"
+            tools:layout_editor_absoluteX="253dp"
+            tools:layout_editor_absoluteY="152dp" />
+
+        <fragment
+            android:id="@+id/fragmentdetail"
+            android:name="com.example.juegopedromanuelcubomedina.DetailFragment"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            tools:layout="@layout/detail_fragment_layout" />
+    </LinearLayout>
+
+
 </LinearLayout>

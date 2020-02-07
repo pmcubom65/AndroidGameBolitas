@@ -4,9 +4,12 @@ import androidx.core.app.ActivityCompat;
 import androidx.fragment.app.FragmentActivity;
 
 import android.Manifest;
+import android.content.ContentValues;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.database.Cursor;
+import android.database.sqlite.SQLiteDatabase;
 import android.graphics.Color;
 import android.location.Address;
 import android.location.Geocoder;
@@ -53,6 +56,11 @@ import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 
 import java.io.IOException;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 
 import android.Manifest;
@@ -94,7 +102,10 @@ public class MapasGoogle extends FragmentActivity implements OnMapReadyCallback{
     Polyline line;
 
     String score;
-
+    int flag=0;
+    LatLng anterior = new LatLng(0, 0);
+    ArrayList<ElPunto> lospuntos=new ArrayList<>();
+    String identificacion="";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -135,9 +146,29 @@ public class MapasGoogle extends FragmentActivity implements OnMapReadyCallback{
                 public void onLocationChanged(Location location) {
                     double latitude = location.getLatitude();
                     double longitude = location.getLongitude();
-                    //get the location name from latitude and longitude
+                    LatLng actual = new LatLng(latitude, longitude);
+
+                    if ((score instanceof String) && identificacion.isEmpty()) {
+                        insertar(score, latitude,longitude);
+
+                    }
+
                     Geocoder geocoder = new Geocoder(getApplicationContext());
-                    try {
+                    mMap.setMaxZoomPreference(20);
+                    mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(actual, 12.0f));
+                    rellenarTodo();
+
+                    lospuntos.forEach(i->{
+                        LatLng latLng2 = new LatLng(i.getLatitud(), i.getLongitud());
+
+                       identificacion=mMap.addMarker(new MarkerOptions().position(latLng2).title(i.getScore())).getId();
+
+                    });
+
+
+
+
+                    /*try {
                         List<Address> addresses =
                                 geocoder.getFromLocation(latitude, longitude, 1);
                         String result = addresses.get(0).getLocality()+":";
@@ -149,6 +180,8 @@ public class MapasGoogle extends FragmentActivity implements OnMapReadyCallback{
 
                             mMap.setMaxZoomPreference(20);
                             mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(latLng, 12.0f));
+
+
                         }
                         else{
                             marker = mMap.addMarker(new MarkerOptions().position(latLng).title("Score "+score));
@@ -159,7 +192,7 @@ public class MapasGoogle extends FragmentActivity implements OnMapReadyCallback{
 
                     } catch (IOException e) {
                         e.printStackTrace();
-                    }
+                    }*/
 
                 }
 
@@ -194,9 +227,37 @@ public class MapasGoogle extends FragmentActivity implements OnMapReadyCallback{
                 public void onLocationChanged(Location location) {
                     double latitude = location.getLatitude();
                     double longitude = location.getLongitude();
+                    mMap.setMaxZoomPreference(20);
+
+
+              //      insertar(score, latitude,longitude);
+
+
+
                     //get the location name from latitude and longitude
                     Geocoder geocoder = new Geocoder(getApplicationContext());
-                    try {
+
+
+
+                //    rellenarTodo();
+                //    mMap.setMaxZoomPreference(20);
+
+                    //mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(latLng, 12.0f));
+
+                  /*  lospuntos.forEach(i->{
+                        LatLng latLng = new LatLng(i.getLatitud(), i.getLongitud());
+                        line = mMap.addPolyline(new PolylineOptions()
+                                .add(latLng)
+                                .width(5)
+                                .color(Color.RED));
+
+
+                    });*/
+
+
+
+
+                    /* try {
                         List<Address> addresses =
                                 geocoder.getFromLocation(latitude, longitude, 1);
                         String result = addresses.get(0).getLocality()+":";
@@ -223,7 +284,7 @@ public class MapasGoogle extends FragmentActivity implements OnMapReadyCallback{
 
                     } catch (IOException e) {
                         e.printStackTrace();
-                    }
+                    }*/
                 }
 
                 @Override
@@ -245,6 +306,77 @@ public class MapasGoogle extends FragmentActivity implements OnMapReadyCallback{
             locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 0, 0, locationListener);
         }
     }
+
+
+    public void insertar(String punt, double lttud, double longtud) {
+
+        MisLocalizaciones rel=new MisLocalizaciones(this);
+        SQLiteDatabase midatabase=rel.getWritableDatabase();
+
+        ContentValues contentvalues2=new ContentValues();
+
+
+
+        contentvalues2.put("puntuacion", "Score: "+punt);
+        contentvalues2.put("latitud", String.valueOf(lttud));
+        contentvalues2.put("longitud", String.valueOf(longtud));
+
+
+        long row= midatabase.insertWithOnConflict("lospuntos",null, contentvalues2, SQLiteDatabase.CONFLICT_REPLACE);
+
+
+           System.out.println("insertado "+row);
+        midatabase.close();
+
+
+        contentvalues2.clear();
+
+    }
+
+
+
+
+
+
+    public void rellenarTodo() {
+
+        lospuntos.clear();
+        MisLocalizaciones re=new MisLocalizaciones(this);
+
+        SQLiteDatabase databaselectura=re.getReadableDatabase();
+        String[] columnas={"puntuacion", "latitud", "longitud"};
+        Cursor cursor= databaselectura.query("lospuntos",columnas,null,null,null,null,null);
+        cursor.moveToFirst();
+
+        if (cursor.moveToNext()) {
+
+            do {
+
+
+                String scores = cursor.getString(0);
+                String lat = cursor.getString(1);
+                String longitud = cursor.getString(2);
+
+                lospuntos.add(new ElPunto(Double.parseDouble(lat), Double.parseDouble(longitud), scores));
+
+
+            } while (cursor.moveToNext());
+        }
+        re.close();
+
+    }
+
+
+
+
+
+
+
+
+
+
+
+
 
     /**
      * Manipulates the map once available.

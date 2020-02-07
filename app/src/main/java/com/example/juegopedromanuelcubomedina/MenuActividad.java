@@ -2,9 +2,12 @@ package com.example.juegopedromanuelcubomedina;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.ListFragment;
 
 import android.content.Intent;
+import android.database.Cursor;
+import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.provider.ContactsContract;
 import android.view.MenuItem;
@@ -14,7 +17,12 @@ import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.Toast;
 
+
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 
 public class MenuActividad extends AppCompatActivity implements TitularFragment.ItemSelected {
 
@@ -22,8 +30,9 @@ public class MenuActividad extends AppCompatActivity implements TitularFragment.
     String[] juegos=new String[2];
     ImageView laimagen;
     ArrayList<Integer> descriptions;
+    private Toolbar toolbar;
 
-    int indice=2;
+    int indice=3;
     static int numerojuego=1;
 
 
@@ -32,12 +41,18 @@ public class MenuActividad extends AppCompatActivity implements TitularFragment.
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_menu_actividad);
 
+        toolbar=findViewById(R.id.latoolbar);
+
+        setSupportActionBar(toolbar);
+
         milista=(ListView) findViewById(R.id.lalista);
+
         laimagen=(ImageView) findViewById(R.id.laimagen);
 
         descriptions=new ArrayList<>();
         descriptions.add(R.drawable.inicio);
         descriptions.add(R.drawable.inicio2);
+        descriptions.add(R.drawable.iraestadisticas);
 
 
         laimagen.setOnClickListener(new View.OnClickListener() {
@@ -52,7 +67,14 @@ public class MenuActividad extends AppCompatActivity implements TitularFragment.
                     numerojuego=2;
                     Intent intent=new Intent(MenuActividad.this, MainActivity2.class);
                     startActivity(intent);
-                } else {
+                } else if (indice==2) {
+                    Intent intent=new Intent(MenuActividad.this, MostrarEstadisticas.class);
+                   rellenarTodo();
+
+
+                    startActivity(intent);
+                }
+                else {
                     MiDialogo miDialogo=new MiDialogo();
                     miDialogo.show(getSupportFragmentManager(),"mi dialogo");
 
@@ -64,6 +86,45 @@ public class MenuActividad extends AppCompatActivity implements TitularFragment.
 
 
     }
+
+
+    public void rellenarTodo() {
+        DateTimeFormatter dtf=DateTimeFormatter.ofPattern("dd/MM/yyyy");
+        Resultados r=new Resultados(this);
+
+        SQLiteDatabase databaselectura=r.getReadableDatabase();
+        String[] columnas={"fecha", "puntuacion", "tiempo", "juego"};
+        Cursor cursor= databaselectura.query("resultado",columnas,null,null,null,null,null);
+        cursor.moveToFirst();
+        LocalDate ld;
+        Final.conjunto.clear();
+        do {
+
+
+            ld=LocalDate.parse(cursor.getString(0), dtf);
+            String score=cursor.getString(1);
+            String tiempo=cursor.getString(2);
+            String numjuegodb=cursor.getString(3);
+
+            Final.conjunto.add(new DatoEstadistico(ld,score ,tiempo, numjuegodb));
+
+
+        }while (cursor.moveToNext());
+
+        Collections.sort(Final.conjunto, new Comparator<DatoEstadistico>() {
+            @Override
+            public int compare(DatoEstadistico o1, DatoEstadistico o2) {
+                return o1.getFecha().compareTo(o2.getFecha());
+            }
+
+
+        });
+
+    }
+
+
+
+
 
 
     @Override
