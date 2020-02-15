@@ -10,6 +10,8 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.provider.ContactsContract;
+import android.view.Menu;
+import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ArrayAdapter;
@@ -18,11 +20,14 @@ import android.widget.ListView;
 import android.widget.Toast;
 
 
+import com.google.android.material.snackbar.Snackbar;
+
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
+import java.util.zip.Inflater;
 
 public class MenuActividad extends AppCompatActivity implements TitularFragment.ItemSelected {
 
@@ -34,6 +39,7 @@ public class MenuActividad extends AppCompatActivity implements TitularFragment.
 
     int indice=3;
     static int numerojuego=1;
+    static ND nd;
 
 
     @Override
@@ -68,7 +74,7 @@ public class MenuActividad extends AppCompatActivity implements TitularFragment.
                     Intent intent=new Intent(MenuActividad.this, MainActivity2.class);
                     startActivity(intent);
                 } else if (indice==2) {
-                    System.out.println("el indice es"+indice);
+
                     Intent intent=new Intent(MenuActividad.this, MostrarEstadisticas.class);
                    rellenarTodo();
 
@@ -85,7 +91,7 @@ public class MenuActividad extends AppCompatActivity implements TitularFragment.
         });
 
 
-
+        nd=new ND();
     }
 
 
@@ -134,5 +140,37 @@ public class MenuActividad extends AppCompatActivity implements TitularFragment.
         laimagen.setImageResource(descriptions.get(index));
 
         indice=index;
+    }
+
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater inflater=getMenuInflater();
+        inflater.inflate(R.menu.menutoolbar2, menu);
+        return true;
+    }
+
+
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+
+        Snackbar snackbar;
+        switch (item.getItemId()) {
+
+            case R.id.ma1:
+                nd.setNivel(1);
+                snackbar=Snackbar.make(laimagen,"Esta en modo normal", Snackbar.LENGTH_INDEFINITE);
+                snackbar.show();
+
+                break;
+
+
+            case R.id.ma2:
+                nd.setNivel(2);
+                snackbar=Snackbar.make(laimagen,"Esta en modo muy dificil", Snackbar.LENGTH_INDEFINITE);
+                snackbar.show();
+                break;
+        }
+        return true;
     }
 }

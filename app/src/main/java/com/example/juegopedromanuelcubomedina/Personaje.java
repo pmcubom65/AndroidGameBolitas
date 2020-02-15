@@ -96,8 +96,18 @@ public class Personaje extends View implements GestureDetector.OnDoubleTapListen
         tiempo=System.currentTimeMillis();
         tiempofinal=0;
 
+
+        verdev=(MenuActividad.nd.getNivel()==2) ? verdev*2 : verdev;
+        rojov=(MenuActividad.nd.getNivel()==2) ? rojov*2 : rojov;
+        coco2v=cocov=(MenuActividad.nd.getNivel()==2) ? cocov*2 : cocov;
+        ninov=(MenuActividad.nd.getNivel()==2) ? ninov*2 : ninov;
     }
 
+    /**
+     *
+     *     *
+     * @param canvas
+     */
     @Override
     protected void onDraw(final Canvas canvas) {
         super.onDraw(canvas);
@@ -137,7 +147,7 @@ public class Personaje extends View implements GestureDetector.OnDoubleTapListen
             canvas.drawBitmap(mono[1],monox,monoy,null);
         }
 
-
+//````fs
 
         cocox=cocox-cocov;
         coco2x=coco2x-coco2v;
@@ -282,6 +292,10 @@ public class Personaje extends View implements GestureDetector.OnDoubleTapListen
 
 
     }
+//*
+
+    //**
+
 
     public void suena() {
         mp = MediaPlayer.create(getContext(), R.raw.coin);

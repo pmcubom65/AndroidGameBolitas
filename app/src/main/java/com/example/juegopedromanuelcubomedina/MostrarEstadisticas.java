@@ -120,10 +120,6 @@ public class MostrarEstadisticas extends AppCompatActivity implements DialogoBor
         MiDialogo2   md2=new MiDialogo2();
         md2.show(getSupportFragmentManager(), "dialogomarcador");
 
-  /*      Intent algps=new Intent(this, MapasGoogle.class);
-        algps.putExtra("score",resultado);
-
-        startActivity(algps); */
 
     }
 
@@ -161,8 +157,7 @@ public class MostrarEstadisticas extends AppCompatActivity implements DialogoBor
                 }catch (ParseException pe) {
                     System.out.println("error parseo");
                 }
-             //   System.out.println(tiempo1);
-               //         System.out.println(tiempo2);
+
                        return -(Float.compare((float)tiempo1,(float) tiempo2));
 
                     }

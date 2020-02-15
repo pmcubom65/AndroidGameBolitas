@@ -49,6 +49,7 @@ public class MainActivity2 extends AppCompatActivity {
         },0,interval);
         intent=new Intent(this, ServicioMusica.class);
         startService(intent);
+
     }
 
 
@@ -66,7 +67,9 @@ public class MainActivity2 extends AppCompatActivity {
 
     @Override
     protected void onDestroy() {
+        finish();
         super.onDestroy();
+
         stopService(intent);
     }
 }

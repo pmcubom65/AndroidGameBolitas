@@ -76,6 +76,10 @@ public class Personaje2 extends View {
         tiempo=System.currentTimeMillis();
         tiempofinal=0;
 
+
+        gotav=(MenuActividad.nd.getNivel()==2) ? gotav*2 : gotav;
+        gota2v=(MenuActividad.nd.getNivel()==2) ? gota2v*2 : gotav;
+        gota3v=(MenuActividad.nd.getNivel()==2) ? gota3v*2 : gotav;
     }
 
     @Override
@@ -245,13 +249,16 @@ public class Personaje2 extends View {
 
 
                 Intent intent=new Intent(getContext(), Final.class);
-                intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                //| Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NO_HISTORY
+                intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK );
+
                 intent.putExtra("puntuacion",String.valueOf(puntuacionfinal));
                 intent.putExtra("segundos",segundos);
                 intent.putExtra("fecha", fecha);
 
 
                 getContext().startActivity(intent);
+
 
         break;
         }
